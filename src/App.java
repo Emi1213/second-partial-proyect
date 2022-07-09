@@ -17,8 +17,7 @@ public class App {
             System.out.print("Option: ");
 
             try {
-                option =
-                        Integer.valueOf(scan.next().replaceAll("\\D*", ""));
+                option = Integer.valueOf(scan.next().replaceAll("\\D*", ""));
             } catch (Exception e) {
                 System.out.println("Invalid option!");
                 option = 0;
@@ -40,5 +39,7 @@ public class App {
                     break;
             }
         } while (option != 3);
+
+        scan.close();
     }
 }
