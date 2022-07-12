@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import EmployeesManagement.EmployeesManagement;
 import TicketsSelling.Ticket;
 import FilesManagement.FilesManagement;
 
@@ -30,7 +32,7 @@ public class App {
                     FilesManagement.main(null);
                     break;
                 case 3:
-                    System.out.println("Option 3");
+                    EmployeesManagement.main(null);
                     break;
                 case 4:
                     System.out.println("\nEs un gusto tenerte en nuestra aplicación, hasta pronto!\n");
