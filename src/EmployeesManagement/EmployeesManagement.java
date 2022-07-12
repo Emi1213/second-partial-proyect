@@ -1,7 +1,6 @@
 package EmployeesManagement;
 
 import java.util.Scanner;
-
 import utils.UserInput;
 
 public class EmployeesManagement {

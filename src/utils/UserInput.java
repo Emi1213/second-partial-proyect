@@ -42,7 +42,7 @@ public class UserInput {
       return Integer.valueOf(scan.next().replaceAll("\\D*", ""));
     } catch (Exception e) {
       System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-      System.out.println("Debes ingresar un número entre 1 y 3.\n\n");
+      System.out.println("Debes ingresar un número de opción correcto\n\n");
       scan.nextLine();
       return 0;
     }
