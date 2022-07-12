@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import EmployeesManagement.EmployeesManagement;
 import TicketsSelling.Ticket;
+import utils.UserInput;
 import FilesManagement.FilesManagement;
 
 public class App {
@@ -21,8 +22,8 @@ public class App {
         int option;
 
         do {
-            showMenu();
-            option = getUserOption(scan);
+            UserInput.showMenu("main");
+            option = UserInput.getUserOption(scan);
 
             switch (option) {
                 case 1:
@@ -45,35 +46,4 @@ public class App {
         } while (option != 4);
     }
 
-    /**
-     * Shows the menu to the user
-     * 
-     * @return void
-     */
-
-    public static void showMenu() {
-        System.out.println("\t1. Tickets Selling");
-        System.out.println("\t2. Files Management");
-        System.out.println("\t3. Tercera opción");
-        System.out.println("\t4. Salir");
-        System.out.print("\n\t-> ");
-    }
-
-    /**
-     * Gets the user option
-     * 
-     * @param scan Scanner to get the user option
-     * @return {int} The user option
-     */
-
-    public static int getUserOption(Scanner scan) {
-        try {
-            return Integer.valueOf(scan.next().replaceAll("\\D*", ""));
-        } catch (Exception e) {
-            System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-            System.out.println("Debes ingresar un número entre 1 y 3.\n\n");
-            scan.nextLine();
-            return 0;
-        }
-    }
 }

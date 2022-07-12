@@ -1,15 +1,41 @@
 package EmployeesManagement;
 
-public class EmployeesManagement {
-  public static void main(String[] args) {
-    Employee employee1 = new Employee("Emilia", "Galarza", 25, 5, "12345678", "Calle falsa 123", "1234567890");
+import java.util.Scanner;
 
-    System.out.println(employee1.getUID());
-    System.out.println(employee1.getEmployeeEmail());
-    System.out.println(employee1.getEmployeeName());
-    System.out.println(employee1.getLastEmployeeName());
-    System.out.println(employee1.getEmployeeAge());
-    System.out.println(employee1.getYearsOfExperience());
+import utils.UserInput;
+
+public class EmployeesManagement {
+  static Scanner scan = new Scanner(System.in);
+
+  public static void main(String[] args) {
+    System.out.println("\n\nBienvenido al Sistema de Gestión de Empleados\n\n");
+    System.out.println("Puedes elegir entre varias opciones:\n");
+
+    int option;
+
+    do {
+      UserInput.showMenu("employees");
+      option = UserInput.getUserOption(scan);
+
+      switch (option) {
+        case 1:
+          // addEmployee();
+          break;
+        case 2:
+          // deleteEmployee();
+          break;
+        case 3:
+          // modifyEmployee();
+          break;
+        case 4:
+          System.out.println("\nEs un gusto tenerte en nuestra aplicación, hasta pronto!\n");
+          break;
+        default:
+          System.out.println("\nEsa opción no existe, intenta de nuevo\n");
+          break;
+      }
+
+    } while (option != 4);
 
   }
 }
