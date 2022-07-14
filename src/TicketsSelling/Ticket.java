@@ -1,9 +1,6 @@
 package TicketsSelling;
 
-import java.util.Scanner;
-
 public class Ticket {
-  public static Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
 
@@ -16,7 +13,7 @@ public class Ticket {
 
       do {
         System.out.println("¿Desea ejecutar esta opción otra vez? (si/no)");
-        String answer = scan.nextLine();
+        String answer = System.console().readLine().trim();
 
         if (answer.equalsIgnoreCase("si")) {
           validexit = true;
@@ -29,6 +26,6 @@ public class Ticket {
 
       } while (!validexit);
     } while (!exit);
-    scan.close();
+
   }
 }

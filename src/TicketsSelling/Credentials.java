@@ -1,9 +1,6 @@
 package TicketsSelling;
 
-import java.util.Scanner;
-
 public class Credentials {
-  public static Scanner scan = new Scanner(System.in);
 
   public void getCredentials() {
 
@@ -29,7 +26,7 @@ public class Credentials {
         case 0:
           do {
             System.out.println("Ingrese su nombre: ");
-            name = scan.nextLine();
+            name = System.console().readLine().trim();
             if (name.matches(regexname)) {
               arrayCredentials[i] = name;
               valid = true;
@@ -42,7 +39,7 @@ public class Credentials {
         case 1:
           do {
             System.out.println("Ingrese su apellido: ");
-            lastname = scan.nextLine();
+            lastname = System.console().readLine().trim();
             if (lastname.matches(regexlastname)) {
               arrayCredentials[i] = lastname;
               valid = true;
@@ -55,7 +52,7 @@ public class Credentials {
         case 2:
           do {
             System.out.println("Ingrese su ID: ");
-            ID = scan.nextLine();
+            ID = System.console().readLine().trim();
             if (ID.matches(regexID)) {
               arrayCredentials[i] = ID;
               valid = true;
@@ -68,7 +65,7 @@ public class Credentials {
         case 3:
           do {
             System.out.println("Ingrese su edad: ");
-            age = scan.nextLine();
+            age = System.console().readLine().trim();
             if (age.matches(regexage)) {
               arrayCredentials[i] = age;
               valid = true;
@@ -81,7 +78,7 @@ public class Credentials {
         case 4:
           do {
             System.out.println("Ingrese su celular: ");
-            cellphone = scan.nextLine();
+            cellphone = System.console().readLine().trim();
             if (cellphone.matches(regexcellphone)) {
               arrayCredentials[i] = cellphone;
               valid = true;
@@ -94,7 +91,7 @@ public class Credentials {
         case 5:
           do {
             System.out.println("Ingrese su email: ");
-            email = scan.nextLine();
+            email = System.console().readLine().trim();
             if (email.matches(regexemail)) {
               arrayCredentials[i] = email;
               valid = true;
@@ -106,8 +103,6 @@ public class Credentials {
           break;
       } // end switch
     }
-
-    scan.close();
 
   }
 }
