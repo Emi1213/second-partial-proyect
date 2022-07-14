@@ -30,7 +30,7 @@ public class UserInput {
    * @return currentParam //String with the user param
    * 
    */
-  public static String getUserParam(Scanner scan, String param, String regexParam) {
+  public static String getUserParam(String param, String regexParam) {
     do {
       System.out.println("Ingrese su " + param + ": ");
       String currentParam = System.console().readLine().trim();
