@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import EmployeesManagement.EmployeesManager;
 import TicketsSelling.Ticket;
 import utils.MenuType;
@@ -15,7 +14,6 @@ public class App {
      * @param args the command line arguments
      * @return void
      */
-
     public static void main(String[] args) {
         System.out.println("\n\nBienvenido al Proyecto del Segundo Parcial de Algoritmos y Lógica de Programación\n\n");
         System.out.println("Elije una opción para empezar\n");
