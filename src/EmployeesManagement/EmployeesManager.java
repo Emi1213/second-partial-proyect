@@ -55,7 +55,7 @@ public class EmployeesManager {
     int employeeAge = Integer.parseInt(UserInput.getUserParam("edad", "[0-9]{2}*"));
     int employeeYearsOfExperience = Integer.parseInt(UserInput.getUserParam("años de experiencia", "[0-9]{1-2}*"));
     String employeePhone = UserInput.getUserParam("telefono", "^[0-9]{10}$");
-    String employeeAddress = UserInput.getUserParam("dirección", "[a-zA-Z0-9\s]*");
+    String employeeAddress = UserInput.getUserParam("dirección", "[a-zA-Z0-9\\s]*");
     String employeeDNI = UserInput.getUserParam("DNI", "[0-9]{10}*");
 
     Employee employee = new Employee(employeeName, employeeLastName, employeeAge, employeeYearsOfExperience,

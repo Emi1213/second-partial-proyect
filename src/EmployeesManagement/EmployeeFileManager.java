@@ -65,7 +65,7 @@ public class EmployeeFileManager {
             employee.setEmployeePhone(UserInput.getUserParam("telefono", "^[0-9]{10}$"));
             break;
           case "dirección":
-            employee.setEmployeeAddress(UserInput.getUserParam("dirección", "[a-zA-Z0-9\s]*"));
+            employee.setEmployeeAddress(UserInput.getUserParam("dirección", "[a-zA-Z0-9\\s]*"));
             break;
           case "DNI":
             employee.setEmployeeDNI(UserInput.getUserParam("DNI", "[0-9]{10}*"));
