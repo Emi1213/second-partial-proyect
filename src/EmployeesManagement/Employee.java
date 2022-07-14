@@ -19,6 +19,9 @@ public class Employee {
    * @param lastEmployeeName
    * @param employeeAge
    * @param yearsOfExperience
+   * @param employeeDNI
+   * @param employeePhone
+   * @param employeeAddress
    */
   public Employee(String employeeName, String lastEmployeeName, int employeeAge, int yearsOfExperience,
       String employeePhone, String employeeAddress, String employeeDNI) {
@@ -29,8 +32,29 @@ public class Employee {
     this.employeePhone = employeePhone;
     this.employeeAddress = employeeAddress;
     this.employeeDNI = employeeDNI;
-    UID = generateUID();
-    employeeEmail = generateEmail();
+    this.employeeLevel = generateEmployeeLevel(yearsOfExperience);
+    this.employeeEmail = generateEmail(employeeName, lastEmployeeName);
+    this.UID = generateUID();
+  }
+
+  /**
+   * Generates the current employee level
+   * 
+   * @param yearsOfExperience
+   * @return String (Junior, Mid-level, Senior)
+   */
+  public String generateEmployeeLevel(int yearsOfExperience) {
+    return yearsOfExperience < 5 ? "Junior" : yearsOfExperience >= 5 && yearsOfExperience < 10 ? "Mid-level" : "Senior";
+  }
+
+  /**
+   * Generates a random email for the employee
+   * 
+   * @return String employeeEmail
+   */
+  public String generateEmail(String employeeName, String lastEmployeeName) {
+    return String.valueOf(employeeName.charAt(0)).toLowerCase() + lastEmployeeName.toLowerCase()
+        + "@wifland.com";
   }
 
   /**
@@ -40,16 +64,6 @@ public class Employee {
    */
   public String generateUID() {
     return String.format("%03d-", (int) (Math.random() * 1000)) + generateLetters();
-  }
-
-  /**
-   * Generates a random email for the employee
-   * 
-   * @return String employeeEmail
-   */
-  public String generateEmail() {
-    return String.valueOf(employeeName.charAt(0)).toLowerCase() + lastEmployeeName.toLowerCase()
-        + "@wifland.com";
   }
 
   /**
@@ -65,6 +79,17 @@ public class Employee {
     }
 
     return letters.toUpperCase();
+  }
+
+  /**
+   * Prints the employee information
+   * 
+   * @return String
+   */
+  public String toString() {
+    return employeeName + ";" + lastEmployeeName + ";" + employeeAge + ";" + yearsOfExperience + ";"
+        + UID + ";" + employeeEmail + ";" + employeePhone + ";" + employeeAddress + ";"
+        + employeeLevel + ";" + employeeDNI;
   }
 
   // Getters
@@ -92,6 +117,22 @@ public class Employee {
     return employeeEmail;
   }
 
+  public String getEmployeePhone() {
+    return employeePhone;
+  }
+
+  public String getEmployeeAddress() {
+    return employeeAddress;
+  }
+
+  public String getEmployeeLevel() {
+    return employeeLevel;
+  }
+
+  public String getEmployeeDNI() {
+    return employeeDNI;
+  }
+
   // Setters
   public void setEmployeeName(String employeeName) {
     this.employeeName = employeeName;
@@ -115,5 +156,17 @@ public class Employee {
 
   public void setEmployeeEmail(String employeeEmail) {
     this.employeeEmail = employeeEmail;
+  }
+
+  public void setEmployeePhone(String employeePhone) {
+    this.employeePhone = employeePhone;
+  }
+
+  public void setEmployeeAddress(String employeeAddress) {
+    this.employeeAddress = employeeAddress;
+  }
+
+  public void setEmployeeLevel(String employeeLevel) {
+    this.employeeLevel = employeeLevel;
   }
 }

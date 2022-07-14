@@ -1,9 +1,11 @@
 package EmployeesManagement;
 
 import java.util.Scanner;
+
+import utils.MenuType;
 import utils.UserInput;
 
-public class EmployeesManagement {
+public class EmployeesManager {
   static Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
@@ -13,11 +15,14 @@ public class EmployeesManagement {
     int option;
 
     do {
-      UserInput.showMenu("employees");
+      MenuType.showMenu("employees");
       option = UserInput.getUserOption(scan);
 
       switch (option) {
         case 1:
+          String employeeName = UserInput.getUserParam(scan, "nombre", "[a-zA-Z]*");
+          String employeeLastName = UserInput.getUserParam(scan, "apellido", "[a-zA-Z]*");
+          String employeeID = UserInput.getUserParam(scan, "ID", "[0-9]*");
           // addEmployee();
           break;
         case 2:
@@ -35,6 +40,5 @@ public class EmployeesManagement {
       }
 
     } while (option != 4);
-
   }
 }
