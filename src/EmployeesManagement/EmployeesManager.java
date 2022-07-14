@@ -11,6 +11,7 @@ public class EmployeesManager {
   public static void main(String[] args) {
     System.out.println("\n\nBienvenido al Sistema de Gestión de Empleados\n\n");
     System.out.println("Puedes elegir entre varias opciones:\n");
+    EmployeeFileManager employeeFileManager = new EmployeeFileManager();
 
     int option;
 
@@ -22,9 +23,18 @@ public class EmployeesManager {
         case 1:
           String employeeName = UserInput.getUserParam("nombre", "[a-zA-Z]*");
           String employeeLastName = UserInput.getUserParam("apellido", "[a-zA-Z]*");
-          String employeeID = UserInput.getUserParam("ID", "[0-9]*");
-          // addEmployee();
+          int employeeAge = Integer.parseInt(UserInput.getUserParam("edad", "[0-9]*"));
+          int employeeYearsOfExperience = Integer.parseInt(UserInput.getUserParam("años de experiencia", "[0-9]*"));
+          String employeePhone = UserInput.getUserParam("telefono", "[0-9]*");
+          String employeeAddress = UserInput.getUserParam("dirección", "[a-zA-Z0-9]*");
+          String employeeDNI = UserInput.getUserParam("DNI", "[0-9]*");
+
+          Employee employee = new Employee(employeeName, employeeLastName, employeeAge, employeeYearsOfExperience,
+              employeePhone, employeeAddress, employeeDNI);
+
+          employeeFileManager.addEmployee(employee);
           break;
+
         case 2:
           // deleteEmployee();
           break;
