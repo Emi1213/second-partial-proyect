@@ -55,20 +55,20 @@ public class EmployeeFileManager {
             employee.setLastEmployeeName(UserInput.getUserParam("apellido", "^[A-Z]{1}[a-z]{2,}$"));
             break;
           case "edad":
-            employee.setEmployeeAge(Integer.parseInt(UserInput.getUserParam("edad", "[0-9]{2}*")));
+            employee.setEmployeeAge(Integer.parseInt(UserInput.getUserParam("edad", "[0-9]{2}")));
             break;
           case "años de experiencia":
             employee
-                .setYearsOfExperience(Integer.parseInt(UserInput.getUserParam("años de experiencia", "[0-9]{1-2}*")));
+                .setYearsOfExperience(Integer.parseInt(UserInput.getUserParam("años de experiencia", "[0-9]{1,2}*")));
             break;
           case "teléfono":
-            employee.setEmployeePhone(UserInput.getUserParam("telefono", "^[0-9]{10}$"));
+            employee.setEmployeePhone(UserInput.getUserParam("telèfono", "^[0-9]{10}$"));
             break;
           case "dirección":
-            employee.setEmployeeAddress(UserInput.getUserParam("dirección", "[a-zA-Z0-9\\s]*"));
+            employee.setEmployeeAddress(UserInput.getUserParam("dirección", "[a-zA-Z0-9\\s]"));
             break;
-          case "DNI":
-            employee.setEmployeeDNI(UserInput.getUserParam("DNI", "[0-9]{10}*"));
+          case "dni":
+            employee.setEmployeeDNI(UserInput.getUserParam("DNI", "[0-9]{10}"));
             break;
         }
       }

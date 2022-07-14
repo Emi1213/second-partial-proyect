@@ -26,6 +26,19 @@ public class MenuType {
         System.out.println("\t5. Salir");
         System.out.print("\n\t-> ");
         break;
+
+      case "modifyEmployee":
+        System.out.println("\t¿Qué desea modificar?");
+        System.out.println("\t1. Nombre");
+        System.out.println("\t2. Apellido");
+        System.out.println("\t3. Edad");
+        System.out.println("\t4. Años de experiencia");
+        System.out.println("\t5. Teléfono");
+        System.out.println("\t6. Dirección");
+        System.out.println("\t7. DNI");
+        System.out.println("\t8. Cancelar");
+        System.out.print("\n\t-> ");
+        break;
     }
   }
 }

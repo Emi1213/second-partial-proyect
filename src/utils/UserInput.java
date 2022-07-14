@@ -31,16 +31,19 @@ public class UserInput {
    */
   public static String getUserParam(String param, String regexParam) {
     do {
-      System.out.print("Ingrese su " + param + ": ");
-      String currentParam = System.console().readLine().trim();
+      try {
+        System.out.print("Ingrese su " + param + ": ");
+        String currentParam = System.console().readLine().trim();
 
-      if (currentParam.matches(regexParam)) {
-        return currentParam;
-      } else {
-        System.out.println("Parametro inválido, intente de nuevo");
-        continue;
+        if (currentParam.matches(regexParam)) {
+          return currentParam;
+        } else {
+          System.out.println("Parametro inválido, intente de nuevo");
+          continue;
+        }
+      } catch (Exception e) {
+        System.out.println("\n\nProcura no cometer errores al ingresar los datos");
       }
-
     } while (true);
   }
 
