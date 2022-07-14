@@ -20,6 +20,9 @@ public class EmployeesManager {
 
       switch (option) {
         case 1:
+          String employeeName = UserInput.getUserParam("nombre", "[a-zA-Z]*");
+          String employeeLastName = UserInput.getUserParam("apellido", "[a-zA-Z]*");
+          String employeeID = UserInput.getUserParam("ID", "[0-9]*");
           // addEmployee();
           break;
         case 2:

@@ -20,4 +20,29 @@ public class UserInput {
       return 0;
     }
   }
+
+  /**
+   * Gets the user param (name, last name, ID, email, etc)
+   * 
+   * @param scan
+   * @param param      //String to get the user param
+   * @param regexParam //String to validate the user param
+   * @return currentParam //String with the user param
+   * 
+   */
+  public static String getUserParam(String param, String regexParam) {
+    do {
+      System.out.println("Ingrese su " + param + ": ");
+      String currentParam = System.console().readLine().trim();
+
+      if (currentParam.matches(regexParam)) {
+        return currentParam;
+      } else {
+        System.out.println("Parametro inválido, intente de nuevo");
+        continue;
+      }
+
+    } while (true);
+  }
+
 }
