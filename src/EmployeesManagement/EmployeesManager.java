@@ -1,9 +1,11 @@
 package EmployeesManagement;
 
 import java.util.Scanner;
+
+import utils.MenuType;
 import utils.UserInput;
 
-public class EmployeesManagement {
+public class EmployeesManager {
   static Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
@@ -13,7 +15,7 @@ public class EmployeesManagement {
     int option;
 
     do {
-      UserInput.showMenu("employees");
+      MenuType.showMenu("employees");
       option = UserInput.getUserOption(scan);
 
       switch (option) {
@@ -35,6 +37,5 @@ public class EmployeesManagement {
       }
 
     } while (option != 4);
-
   }
 }

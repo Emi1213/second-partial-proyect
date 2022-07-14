@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-import EmployeesManagement.EmployeesManagement;
+import EmployeesManagement.EmployeesManager;
 import TicketsSelling.Ticket;
+import utils.MenuType;
 import utils.UserInput;
 import FilesManagement.FilesManagement;
 
@@ -22,7 +23,7 @@ public class App {
         int option;
 
         do {
-            UserInput.showMenu("main");
+            MenuType.showMenu("main");
             option = UserInput.getUserOption(scan);
 
             switch (option) {
@@ -33,7 +34,7 @@ public class App {
                     FilesManagement.main(null);
                     break;
                 case 3:
-                    EmployeesManagement.main(null);
+                    EmployeesManager.main(null);
                     break;
                 case 4:
                     System.out.println("\nEs un gusto tenerte en nuestra aplicación, hasta pronto!\n");
