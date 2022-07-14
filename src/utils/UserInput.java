@@ -25,7 +25,10 @@ public class UserInput {
    * Gets the user param (name, last name, ID, email, etc)
    * 
    * @param scan
-   * @return
+   * @param param      //String to get the user param
+   * @param regexParam //String to validate the user param
+   * @return currentParam //String with the user param
+   * 
    */
   public static String getUserParam(Scanner scan, String param, String regexParam) {
     do {
