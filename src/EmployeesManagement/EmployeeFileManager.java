@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class EmployeeFileManager {
   public static final String FILE_NAME = "employees.txt";
@@ -14,6 +15,7 @@ public class EmployeeFileManager {
   public PrintWriter pw;
   public FileReader fr;
   public BufferedReader br;
+  // private ArrayList<Employee> employees = new ArrayList<Employee>();
 
   public EmployeeFileManager() {
     try {
