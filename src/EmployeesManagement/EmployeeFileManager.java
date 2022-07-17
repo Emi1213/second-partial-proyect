@@ -3,8 +3,8 @@ package EmployeesManagement;
 import java.util.ArrayList;
 
 import utils.UserInput;
-
 import java.io.*;
+import utils.*;
 
 public class EmployeeFileManager {
   public static final String FILE_NAME = "employees.txt";
@@ -31,7 +31,7 @@ public class EmployeeFileManager {
 
   public static void addEmployee(Employee employee) {
     employees.add(employee);
-    System.out.println("Empleado agregado correctamente");
+    System.out.println(Colors.ANSI_GREEN + "\n-> Empleado agregado correctamente\n" + Colors.ANSI_RESET);
   }
 
   public static void deleteEmployee(String UID) {

@@ -10,15 +10,13 @@ public class EmployeesManager {
 
   public static void main(String[] args) {
     System.out.println("\n\nBienvenido al Sistema de Gestión de Empleados\n\n");
-    System.out.println("Puedes elegir entre varias opciones:\n");
 
     int option;
 
     do {
+      System.out.println("Para continuar, elige una de estas opciones:\n");
       MenuType.showMenu("employees");
       option = UserInput.getUserOption(scan);
-
-      // TODO: Crear una forma de pedir el UID
 
       switch (option) {
         case 1:
@@ -63,6 +61,7 @@ public class EmployeesManager {
   }
 
   public static Employee getEmployeeInfo() {
+    System.out.println("\n\nPara agregar un nuevo empleado, ingrese los siguientes datos:\n");
     String employeeName = UserInput.getUserParam("nombre", "^[A-Z]{1}[a-z]{2,}$");
     String employeeLastName = UserInput.getUserParam("apellido", "^[A-Z]{1}[a-z]{2,}$");
     int employeeAge = Integer.parseInt(UserInput.getUserParam("edad", "[0-9]{2}"));

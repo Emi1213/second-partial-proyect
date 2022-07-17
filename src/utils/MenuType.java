@@ -7,7 +7,6 @@ public class MenuType {
    * @param menuType the type of menu to show
    * @return void
    */
-
   public static void showMenu(String menuType) {
     switch (menuType) {
       case "main":
