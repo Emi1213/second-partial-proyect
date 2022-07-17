@@ -146,12 +146,23 @@ public class Employee {
     this.employeeAge = employeeAge;
   }
 
+  /**
+   * Sets the years of experience of the employee and updates the
+   * employee level
+   * 
+   * @param yearsOfExperience years of experience of the employee
+   * @return {void}
+   */
   public void setYearsOfExperience(int yearsOfExperience) {
     this.yearsOfExperience = yearsOfExperience;
-  }
 
-  public void setUID(String UID) {
-    this.UID = UID;
+    if (yearsOfExperience < 5) {
+      this.employeeLevel = "Junior";
+    } else if (yearsOfExperience >= 5 && yearsOfExperience < 10) {
+      this.employeeLevel = "Mid-level";
+    } else {
+      this.employeeLevel = "Senior";
+    }
   }
 
   public void setEmployeeEmail(String employeeEmail) {
@@ -166,7 +177,7 @@ public class Employee {
     this.employeeAddress = employeeAddress;
   }
 
-  public void setEmployeeLevel(String employeeLevel) {
-    this.employeeLevel = employeeLevel;
+  public void setEmployeeDNI(String employeeDNI) {
+    this.employeeDNI = employeeDNI;
   }
 }
