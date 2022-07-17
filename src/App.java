@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import EmployeesManagement.EmployeesManager;
@@ -14,9 +15,10 @@ public class App {
      * 
      * @param args the command line arguments
      * @return void
+     * @throws IOException
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("\n\nBienvenido al Proyecto del Segundo Parcial de Algoritmos y Lógica de Programación\n\n");
         System.out.println("Elije una opción para empezar\n");
 
