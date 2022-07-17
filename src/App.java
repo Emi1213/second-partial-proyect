@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-
 import EmployeesManagement.EmployeesManager;
 import TicketsSelling.Ticket;
 import utils.MenuType;
@@ -19,6 +18,7 @@ public class App {
      */
 
     public static void main(String[] args) throws IOException {
+
         System.out.println("\n\nBienvenido al Proyecto del Segundo Parcial de Algoritmos y Lógica de Programación\n\n");
         System.out.println("Elije una opción para empezar\n");
 
@@ -48,5 +48,3 @@ public class App {
 
         } while (option != 4);
     }
-
-}
