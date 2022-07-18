@@ -1,10 +1,14 @@
 package TicketsSelling;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Ticket {
 
-  public static void main(String[] args) throws IOException  {
+  LocalDateTime purchaseStartTime = LocalDateTime.now();
+  String purchaseStartTimeString = purchaseStartTime.toString();
+
+  public static void main(String[] args) throws IOException {
 
     boolean exit = false;
     boolean validexit = false;
@@ -19,12 +23,14 @@ public class Ticket {
     do {
 
       System.out.println("\n\n");
+      System.out
+          .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos");
 
       Credentials credentials = new Credentials();
       credentials.getCredentials();
 
       Destinos destinos = new Destinos();
-      destinos.getDestinos();
+      destinos.showDestinos();
 
       do {
 

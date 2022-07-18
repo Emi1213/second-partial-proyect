@@ -4,6 +4,13 @@ import utils.*;
 
 public class Credentials {
 
+  String arrayCredentials[] = new String[6];
+
+  /**
+   * @description This method is used to get the credentials of the user
+   * 
+   * @return void
+   */
   public void getCredentials() {
 
     String name = "";
@@ -19,43 +26,52 @@ public class Credentials {
     String regexAge = "^[0-9]{1,2}$";
     String regexCellPhone = "^[0-9]{10}$";
     String regexEmail = "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$";
+    String[] codesClients = { " 1413", "1420", "1515", "1710", "1616", "1855" };
 
-    String arrayCredentials[] = new String[6];
+    String customErrorMessage = "El dato ingresado no es válido, intenta de nuevo";
 
     for (int i = 0; i < arrayCredentials.length; i++) {
       switch (i) {
         case 0:
-          name = UserInput.getUserParam("nombre", regexName);
+          name = UserInput.getUserParam("Ingresa tu nombre: ", regexName, customErrorMessage);
           arrayCredentials[i] = name;
           break;
 
         case 1:
-          lastName = UserInput.getUserParam("apellido", regexLastName);
+          lastName = UserInput.getUserParam("Ingresa tu apellido: ", regexLastName, customErrorMessage);
           arrayCredentials[i] = lastName;
           break;
 
         case 2:
-          ID = UserInput.getUserParam("ID", regexID);
+          ID = UserInput.getUserParam("Ingresa tu identificación: ", regexID, customErrorMessage);
           arrayCredentials[i] = ID;
           break;
 
         case 3:
-          age = UserInput.getUserParam("edad", regexAge);
+          age = UserInput.getUserParam("Ingresa tu edad: ", regexAge, customErrorMessage);
           arrayCredentials[i] = age;
           break;
 
         case 4:
-          cellPhone = UserInput.getUserParam("celular", regexCellPhone);
+          cellPhone = UserInput.getUserParam("Ingresa tu número de telefono: ", regexCellPhone, customErrorMessage);
           arrayCredentials[i] = cellPhone;
           break;
 
         case 5:
-          email = UserInput.getUserParam("email", regexEmail);
+          email = UserInput.getUserParam("Ingresa tu email: ", regexEmail, customErrorMessage);
           arrayCredentials[i] = email;
           break;
 
       } // end switch
     }
 
+  }
+
+  /**
+   * @description This method is used to return the credentials of the user
+   * @return String[] The credentials of the user
+   */
+  public String[] getArrayCredentials() {
+    return arrayCredentials;
   }
 }
