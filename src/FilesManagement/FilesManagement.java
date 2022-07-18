@@ -42,7 +42,8 @@ public class FilesManagement {
                         options.showOptions();
                     } else {
                         System.out.println("\nGracias por usar nuestra aplicación\n");
-                        System.out.println("\n¿Quieres volver a empezar? (si/no)");
+                        System.out.println(
+                                "\n¿Quieres volver a empezar? (si/no)\n Al presionar \"n\" o \"no\" se terminará la ejecución de esta opción");
                         runProjectAgain = UserInput.getSNUserOption();
                         fc.saveInLog("\nFin de gestión del proyecto " + projectName + " en " + projectPath);
 
@@ -53,14 +54,15 @@ public class FilesManagement {
                 }
 
             } else {
-                System.out.println("\n¿Quieres volver a empezar? (si/no)");
+                System.out.println(
+                        "\n¿Quieres volver a empezar? (si/no)\n Al presionar \"n\" o \"no\" se terminará la ejecución de esta opción");
                 runProjectAgain = UserInput.getSNUserOption();
                 if (runProjectAgain) {
-                    System.out.println("\nVuelve a empezar");
+                    System.out.println("\nVuelve a empezar*");
                 } else {
                     System.out.println("\nGracias por usar nuestra aplicación");
                     System.out.println("Saliendo de la aplicación...");
-                    System.out.println("Esperamos que vuelvas pronto");
+                    System.out.println("Esperamos que vuelvas pronto\n\n");
 
                 }
             }
