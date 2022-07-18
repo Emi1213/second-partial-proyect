@@ -10,6 +10,9 @@ public class Ticket {
 
   public static void main(String[] args) throws IOException {
 
+    Credentials credentials = new Credentials();
+    Destinos destinos = new Destinos();
+    Ticket tickets = new Ticket();
     boolean exit = false;
     boolean validexit = false;
 
@@ -26,11 +29,13 @@ public class Ticket {
       System.out
           .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos");
 
-      Credentials credentials = new Credentials();
       credentials.getCredentials();
 
-      Destinos destinos = new Destinos();
+      System.out.println("\n\n");
+
       destinos.showDestinos();
+
+      tickets.showFacture();
 
       do {
 
@@ -50,6 +55,33 @@ public class Ticket {
 
       } while (!validexit);
     } while (!exit);
+
+  }
+
+  public void showFacture() throws IOException {
+
+    Facture facture = new Facture();
+
+    System.out.println("\n\n");
+    System.out.println("Desea su factura fisica o electronica? (fisica/electronica)");
+    String answer = System.console().readLine().trim();
+    boolean validexit = false;
+
+    do {
+      if (answer.equalsIgnoreCase("fisica")) {
+
+        facture.factureFisic();
+        validexit = true;
+
+      } else if (answer.equalsIgnoreCase("electronica")) {
+
+        facture.factureElectronic();
+        validexit = true;
+
+      } else {
+        System.out.println("Respuesta inválida, intente de nuevo");
+      }
+    } while (!validexit);
 
   }
 }
