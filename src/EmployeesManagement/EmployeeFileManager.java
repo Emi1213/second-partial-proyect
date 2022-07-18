@@ -3,8 +3,8 @@ package EmployeesManagement;
 import java.util.ArrayList;
 
 import utils.UserInput;
-
 import java.io.*;
+import utils.*;
 
 public class EmployeeFileManager {
   public static final String FILE_NAME = "employees.txt";
@@ -13,7 +13,7 @@ public class EmployeeFileManager {
   public static PrintWriter pw;
   public static FileReader fr;
   public static BufferedReader br;
-  private static ArrayList<Employee> employees = new ArrayList<Employee>();
+  public static ArrayList<Employee> employees = new ArrayList<Employee>();
 
   public EmployeeFileManager() {
     try {
@@ -31,17 +31,22 @@ public class EmployeeFileManager {
 
   public static void addEmployee(Employee employee) {
     employees.add(employee);
-    System.out.println("Empleado agregado correctamente");
+    System.out.println(Colors.ANSI_GREEN + "\n-> Empleado agregado correctamente\n" + Colors.ANSI_RESET);
   }
 
-  public static void deleteEmployee(String UID) {
+  public static boolean deleteEmployee(String UID) {
     for (Employee employee : employees) {
       if (employee.getUID().equals(UID)) {
         employees.remove(employee);
         System.out.println("Empleado eliminado correctamente");
-        break;
+        return true;
       }
     }
+
+    System.out
+        .println(Colors.ANSI_RED + "\n-> No se encontró el empleado con el UID: " + UID
+            + Colors.ANSI_RESET);
+    return false;
   }
 
   public static void modifyEmployee(String UID, String paramToModify) {
@@ -49,26 +54,42 @@ public class EmployeeFileManager {
       if (employee.getUID() == UID) {
         switch (paramToModify) {
           case "nombre":
-            employee.setEmployeeName(UserInput.getUserParam("nombre", "^[A-Z]{1}[a-z]{2,}$"));
+            employee.setEmployeeName(
+                UserInput.getUserParam("Ingresa el nombre", "^[A-Z]{1}[a-z]{2,}$", "Procura ingresa un nombre válido"));
             break;
+
           case "apellido":
-            employee.setLastEmployeeName(UserInput.getUserParam("apellido", "^[A-Z]{1}[a-z]{2,}$"));
+            employee.setLastEmployeeName(UserInput.getUserParam("Ingresa el apellido", "^[A-Z]{1}[a-z]{2,}$",
+                "Procura ingresa un apellido válido"));
             break;
+
           case "edad":
-            employee.setEmployeeAge(Integer.parseInt(UserInput.getUserParam("edad", "[0-9]{2}")));
+            employee.setEmployeeAge(
+                Integer.parseInt(
+                    UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida")));
             break;
+
           case "años de experiencia":
             employee
-                .setYearsOfExperience(Integer.parseInt(UserInput.getUserParam("años de experiencia", "[0-9]{1,2}*")));
+                .setYearsOfExperience(Integer.parseInt(
+                    UserInput.getUserParam("Ingresa los años de experiencia", "[0-9]{1,2}*",
+                        "Procura ingresa un valor válido")));
             break;
+
           case "teléfono":
-            employee.setEmployeePhone(UserInput.getUserParam("telèfono", "^[0-9]{10}$"));
+            employee.setEmployeePhone(
+                UserInput.getUserParam("Ingresa el teléfono", "^[0-9]{10}$", "Procura ingresa un teléfono válido"));
             break;
+
           case "dirección":
-            employee.setEmployeeAddress(UserInput.getUserParam("dirección", "[a-zA-Z0-9\\s]"));
+            employee.setEmployeeAddress(
+                UserInput.getUserParam("Ingresa la dirección", "[a-zA-Z0-9\\s]",
+                    "Procura ingresa una dirección válida"));
             break;
+
           case "dni":
-            employee.setEmployeeDNI(UserInput.getUserParam("DNI", "[0-9]{10}"));
+            employee
+                .setEmployeeDNI(UserInput.getUserParam("Ingresa el DNI", "[0-9]{10}", "Procura ingresa un DNI válido"));
             break;
         }
       }

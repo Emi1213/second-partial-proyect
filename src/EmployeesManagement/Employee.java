@@ -3,14 +3,14 @@ package EmployeesManagement;
 public class Employee {
   private String employeeName;
   private String lastEmployeeName;
-  private int employeeAge;
-  private int yearsOfExperience;
   private String UID;
   private String employeeEmail;
   private String employeePhone;
   private String employeeAddress;
   private String employeeLevel;
   private String employeeDNI;
+  private int yearsOfExperience;
+  private int employeeAge;
 
   /**
    * Constructor of the class
