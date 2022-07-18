@@ -24,6 +24,7 @@ public class Destinos {
     writer.write(" Ibarra   \t 191536 \t     50             \t   $12         \t      $10");
     writer.write(" Zamora   \t 201536 \t     45             \t   $10         \t      $8");
     writer.write(" Latacunga\t 211536 \t     60             \t   $3          \t      $2");
+    writer.write("fin");
 
     writer.close();
 
