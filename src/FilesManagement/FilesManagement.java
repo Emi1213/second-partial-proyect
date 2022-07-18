@@ -1,48 +1,70 @@
 package FilesManagement;
 
+import utils.UserInput;
+
 public class FilesManagement {
     public static void main(String[] args) {
+
         FileCreation fc;
         InitialData id = new InitialData();
         String projectName = "";
         String projectPath = "";
         String packageName = "";
-        String answer = "";
-        boolean isValidAnwer = false;
+        boolean answer = true;
+        boolean runGestion = true;
+        boolean runProjectAgain = true;
 
         Options options;
 
-        System.out.println("Bienvenido a la opción para gestionar archivos y directorios");
         do {
-            System.out.println("Vamos a empezar creando tu proyecto");
+
+            System.out.println("\nBienvenido a la opción para crear proyectos y gestionar archivos y directorios");
+
+            System.out.println("\nVamos a empezar creando tu proyecto");
             System.out.println("Estas de acuerdo? (si/no)");
-            answer = System.console().readLine().toLowerCase();
-            if (answer == "si" || answer == "no" || answer == "s" || answer == "n") {
-                isValidAnwer = true;
+            answer = UserInput.getSNUserOption();
+
+            if (answer) {
+                try {
+                    projectName = id.setProjectName();
+                    projectPath = id.setProjectPath();
+                    packageName = id.setPackageName();
+                    fc = new FileCreation(projectName, projectPath, packageName);
+                    fc.createProjectFolder();
+                    fc.createPackageFolder();
+                    fc.saveInLog("Creación del proyecto " + projectName + " en " + projectPath);
+                    System.out.println("\nQuieres empezar a gestionarlo? (si/no)");
+                    runGestion = UserInput.getSNUserOption();
+
+                    if (runGestion) {
+                        fc.saveInLog("Inicio de gestión del proyecto " + projectName + " en " + projectPath);
+                        options = new Options(fc);
+                        options.showOptions();
+                    } else {
+                        System.out.println("\nGracias por usar nuestra aplicación\n");
+                        System.out.println("\n¿Quieres volver a empezar? (si/no)");
+                        runProjectAgain = UserInput.getSNUserOption();
+                        fc.saveInLog("\nFin de gestión del proyecto " + projectName + " en " + projectPath);
+
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("\nError al crear el proyecto" + e.getMessage());
+                }
+
             } else {
-                System.out.println("La respuesta ingresada no es válida");
-                isValidAnwer = false;
+                System.out.println("\n¿Quieres volver a empezar? (si/no)");
+                runProjectAgain = UserInput.getSNUserOption();
+                if (runProjectAgain) {
+                    System.out.println("\nVuelve a empezar");
+                } else {
+                    System.out.println("\nGracias por usar nuestra aplicación");
+                    System.out.println("Saliendo de la aplicación...");
+                    System.out.println("Esperamos que vuelvas pronto");
+
+                }
             }
-
-        } while (!isValidAnwer == true);
-        if (answer == "si" || answer == "s") {
-            try {
-                projectName = id.setProjectName();
-                projectPath = id.setProjectPath();
-                packageName = id.setPackageName();
-                fc = new FileCreation(projectName, projectPath, packageName);
-                fc.createProjectFolder();
-                fc.createPackageFolder();
-                System.out.println("El proyecto se ha creado correctamente\n");
-                options = new Options(fc);
-
-            } catch (Exception e) {
-                System.out.println("Error al crear el proyecto");
-            }
-
-        } else {
-            System.out.println("Esperamos que vuelvas pronto");
-        }
+        } while (runProjectAgain);
 
     }
 }
