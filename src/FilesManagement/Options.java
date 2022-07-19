@@ -8,7 +8,7 @@ import utils.UserInput;
 public class Options {
     FileCreation fileCreation;
     final String OPTIONS[] = { "",
-            Colors.ANSI_BLACK + "1. Mostrar los archivos y directorios contenidos en el directorio del proyecto",
+            "1. Mostrar los archivos y directorios contenidos en el directorio del proyecto",
             "2. Crear archivos", "3. Modificar el nombre de una carpeta o archivo",
             "4. Eliminar un archivo o directorio", "5. Leer un archivo y mostrarlo en pantalla",
             "6. Escribir en un archivo", "7. Copiar un archivo", "8. Salir de las opciones de gestión\n" };
@@ -136,7 +136,7 @@ public class Options {
     public boolean getUserRunAgain() {
         boolean runAgain = true;
         System.out.println(
-                Colors.ANSI_YELLOW
+                Colors.ANSI_CYAN
                         + "\n¿Desea ejecutar otra opción o ejecutar esta opción otra vez? (s/n)\n Al seleccionar s, se mostrarán nuevamente las opciones de gestión, al pulsar n, se finalizará la ejecución de las opciones de gestión y se mostrará la ventana inicial de creación de proyecto"
                         + Colors.ANSI_RESET);
         runAgain = UserInput.getSNUserOption();

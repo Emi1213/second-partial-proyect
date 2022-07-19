@@ -100,23 +100,23 @@ public class FileCreation {
     }
 
     /**
-     * @description Creates the package folders
+     * @description Creates the package folders in subfolders of the project
      * @return {boolean} True if the package folder was created successfully,
      *         false otherwise
      */
 
-    public boolean createPackageFolder() {
+    public boolean createScalonatePackageFolder() {
         boolean isCreated = true;
-        File packageFolder;
+        File packageFolder = new File(getProjectFolderPath());
         ArrayList<String> ArraypackageName = new ArrayList<String>();
+
         try {
             if (packageName.contains(".")) {
                 for (int i = 0; i < packageName.split("\\.").length; i++) {
                     ArraypackageName.add(packageName.split("\\.")[i]);
                 }
-
                 for (int i = 0; i < ArraypackageName.size(); i++) {
-                    packageFolder = new File(getProjectFolderPath() + "\\" + ArraypackageName.get(i));
+                    packageFolder = new File(packageFolder.getAbsolutePath() + "\\" + ArraypackageName.get(i));
                     if (packageFolder.exists()) {
                         System.out.println("El paquete ya existe");
                         isCreated = false;
@@ -124,7 +124,6 @@ public class FileCreation {
                     } else {
                         packageFolder.mkdir();
                         System.out.println("El paquete se ha creado correctamente");
-
                         isCreated = true;
                     }
                 }

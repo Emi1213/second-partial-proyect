@@ -31,7 +31,15 @@ public class FilesManagement {
                     packageName = id.setPackageName();
                     fc = new FileCreation(projectName, projectPath, packageName);
                     fc.createProjectFolder();
-                    fc.createPackageFolder();
+                    System.out.println("Quieres crear los paquetes en forma escalonada o en el mismo directorio?");
+                    int option = InitialData.getNumeredOptionByArray(new String[] { "Escalonado", "Mismo directorio" });
+
+                    if (option == 1) {
+                        fc.createScalonatePackageFolder();
+                    } else {
+                        fc.createPackageFolder();
+                    }
+
                     fc.saveInLog("Creación del proyecto " + projectName + " en " + projectPath);
                     System.out.println("\nQuieres empezar a gestionarlo? (si/no)");
                     runGestion = UserInput.getSNUserOption();
