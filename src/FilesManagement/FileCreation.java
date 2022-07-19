@@ -67,20 +67,26 @@ public class FileCreation {
 
     public boolean createProjectFolder() {
         File projectFolder = new File(projectPath + "\\" + projectName);
+        File fileProjectPath = new File(projectPath);
+        if (fileProjectPath.exists()) {
 
-        if (projectFolder.exists()) {
-            System.out.println("El proyecto ya existe");
-            return false;
-        } else {
-            try {
-                projectFolder.mkdir();
-                System.out.println("\nEl proyecto se ha creado correctamente");
-                saveInLog("Se creó la carpeta del proyecto");
-                return true;
-            } catch (SecurityException e) {
-                System.out.println("Error al crear el proyecto");
+            if (projectFolder.exists()) {
+                System.out.println("El proyecto ya existe");
                 return false;
+            } else {
+                try {
+                    projectFolder.mkdir();
+                    System.out.println("\nEl proyecto se ha creado correctamente");
+                    saveInLog("Se creó la carpeta del proyecto");
+                    return true;
+                } catch (SecurityException e) {
+                    System.out.println("Error al crear el proyecto");
+                    return false;
+                }
             }
+        } else {
+            System.out.println("El directorio ingresado no existe no existe");
+            return false;
         }
     }
 

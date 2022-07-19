@@ -1,12 +1,15 @@
 package FilesManagement;
 
+import java.awt.Color;
 import java.io.File;
+import utils.Colors;
 
 import utils.UserInput;
 
 public class Options {
     FileCreation fileCreation;
-    final String OPTIONS[] = { "", "1. Mostrar los archivos y directorios contenidos en el directorio del proyecto",
+    final String OPTIONS[] = { "",
+            Colors.ANSI_BLACK + "1. Mostrar los archivos y directorios contenidos en el directorio del proyecto",
             "2. Crear archivos", "3. Modificar el nombre de una carpeta o archivo",
             "4. Eliminar un archivo o directorio", "5. Leer un archivo y mostrarlo en pantalla",
             "6. Escribir en un archivo", "7. Copiar un archivo", "8. Salir de las opciones de gestión\n" };
@@ -30,7 +33,7 @@ public class Options {
         do {
             System.out.println("\nSeleccione una opción:");
             for (int i = 0; i < OPTIONS.length; i++) {
-                System.out.println(OPTIONS[i]);
+                System.out.println(Colors.ANSI_BLACK + OPTIONS[i]);
             }
             option = Integer.parseInt(System.console().readLine());
             if (option > 8 || option < 1) {

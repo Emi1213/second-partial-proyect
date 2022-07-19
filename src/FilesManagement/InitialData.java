@@ -31,12 +31,17 @@ public class InitialData {
         String projectPath = "";
         boolean isValidProjectPath = false;
         do {
-            System.out.println("\nIngrese el path del proyecto");
-            projectPath = System.console().readLine().trim();
-            if (projectPath.length() > 0) {
-                isValidProjectPath = true;
-            } else {
-                System.out.println("\nEl path del proyecto no puede ser vacío");
+            try {
+                System.out.println("\nIngrese el path del proyecto");
+                projectPath = System.console().readLine().trim();
+                if (projectPath.length() > 0) {
+                    isValidProjectPath = true;
+                } else {
+                    System.out.println("\nEl path del proyecto no puede ser vacío");
+                    isValidProjectPath = false;
+                }
+            } catch (Exception e) {
+                System.out.println("\nError en el Path ingresado " + e.getMessage());
                 isValidProjectPath = false;
             }
         } while (!isValidProjectPath);
