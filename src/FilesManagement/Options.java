@@ -136,7 +136,9 @@ public class Options {
     public boolean getUserRunAgain() {
         boolean runAgain = true;
         System.out.println(
-                "\n¿Desea ejecutar otra opción o ejecutar esta opción otra vez? (s/n)\n Al seleccionar s, se mostrarán nuevamente las opciones de gestión, al pulsar n, se finalizará la ejecución de las opciones de gestión y se mostrará la ventana inicial de creación de proyecto");
+                Colors.ANSI_YELLOW
+                        + "\n¿Desea ejecutar otra opción o ejecutar esta opción otra vez? (s/n)\n Al seleccionar s, se mostrarán nuevamente las opciones de gestión, al pulsar n, se finalizará la ejecución de las opciones de gestión y se mostrará la ventana inicial de creación de proyecto"
+                        + Colors.ANSI_RESET);
         runAgain = UserInput.getSNUserOption();
         return runAgain;
     }

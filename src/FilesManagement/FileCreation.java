@@ -356,7 +356,7 @@ public class FileCreation {
      */
     public String getTime() {
         LocalDateTime isTime = LocalDateTime.now();
-        String time = isTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        String time = isTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"));
 
         return time;
     }
@@ -761,7 +761,7 @@ public class FileCreation {
                                 newFile.delete();
                                 copyTo(file, newFile);
                                 System.out.println("El archivo se ha copiado correctamente");
-                                saveInLog("Copia exact del archivo: " + file.getName());
+                                saveInLog("Copia exacta del archivo: " + file.getName());
                                 isCopied = true;
                             } else {
                                 System.out.println("No se ha copiado el archivo");
@@ -769,7 +769,7 @@ public class FileCreation {
                         } else {
                             copyTo(file, newFile);
                             System.out.println("El archivo se ha copiado correctamente");
-                            saveInLog("Copia exact del archivo: " + file.getName());
+                            saveInLog("Copia exacta del archivo: " + file.getName());
                             isCopied = true;
                         }
                         break;
