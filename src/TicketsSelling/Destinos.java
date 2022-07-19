@@ -7,9 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import utils.UserInput;
+
 public class Destinos {
 
   boolean exit = false;
+  String[] cityDescount = { "001", "002" };
   String[] codetDestiny = { "17", "13", "09", "07" };
   String regexdate = "^[0-9]{2}-[0-9]{2}-[0-9]{4}$";
   String regexnumberSeats = "^[0-9]{1,2}$";
@@ -76,15 +79,23 @@ public class Destinos {
   }
 
   ArrayList<String> listDestiny = new ArrayList<String>();
+  ArrayList<Double> pricesWithD = new ArrayList<Double>();
 
   public void getDestiny() {
-
+    int cont = 0;
+    int cont1 = 0;
+    int cont2 = 0;
     String code = "";
     boolean validation = false;
     String line = "";
+    String city = "";
     int numberSeatsToSet;
+    int price;
+    double priceWithDescount = 0;
+    String codecity = "";
 
     do {
+      cont++;
       try {
         System.out.println("\n\n");
         do {
@@ -93,58 +104,68 @@ public class Destinos {
           switch (destiny) {
             case 1:
               line = destination[0];
-              listDestiny.add(line);
+              city = "Quito";
               code = "17";
+              codecity = "001";
               validation = true;
 
               break;
             case 2:
               line = destination[1];
-              listDestiny.add(line);
+              city = "Manta";
               code = "13";
               validation = true;
+              codecity = "002";
               break;
             case 3:
               line = destination[2];
-              listDestiny.add(line);
+              city = "Loja";
               validation = true;
+              codecity = "001";
               break;
             case 4:
               line = destination[3];
-              listDestiny.add(line);
+              city = "Guayaquil";
               code = "4";
               validation = true;
+              codecity = "002";
               break;
             case 5:
               line = destination[4];
-              listDestiny.add(line);
+              city = "Cuenca";
               validation = true;
+              codecity = "001";
               break;
             case 6:
               line = destination[5];
-              listDestiny.add(line);
+              city = "Macas";
               validation = true;
               break;
             case 7:
               line = destination[6];
-              listDestiny.add(line);
+              city = "Riobamba";
+              codecity = "001";
               validation = true;
               break;
             case 8:
               line = destination[7];
-              listDestiny.add(line);
+              city = "Machala";
               code = "09";
+              codecity = "002";
               validation = true;
               break;
             case 9:
               line = destination[8];
-              listDestiny.add(line);
+              city = "Latacunga";
+              codecity = "001";
               validation = true;
               break;
             case 10:
               line = destination[9];
-              listDestiny.add(line);
+              city = "Ibarra";
+              codecity = "001";
               validation = true;
+
               break;
             default:
               System.out.println("El numero de destino ingresado no es valido, intente de nuevo");
@@ -163,15 +184,28 @@ public class Destinos {
           }
         } while (!validation);
 
+        String date = UserInput.getUserParam("Ingresa la fecha de viaje  ", regexdate, customErrorMessage);
+
         NumberSeats numberSeats = new NumberSeats();
 
-        int price = numberSeats.Destin(line, numberSeatsToSet);
+        price = numberSeats.Destin(line, numberSeatsToSet);
 
-        // for (int k = 0; k < codetDestiny.length; k++) {
-        // if (codetDestiny[k].equals(code)) {
+        for (int k = 0; k < codetDestiny.length; k++) {
+          if (codetDestiny[k].equals(code)) {
+            priceWithDescount = price - (price * 0.10);
+          } else {
+            priceWithDescount = price;
+          }
+        }
 
-        // }
-        // }
+        if (codecity.equals("001")) {
+          cont1++;
+        } else if (codecity.equals("002")) {
+          cont2++;
+        }
+
+        pricesWithD.add(priceWithDescount);
+        listDestiny.add(city + "  " + numberSeatsToSet + "  " + date + "  " + priceWithDescount);
 
         do {
           System.out.println("Desea ingresar otro destino? (Si/No)");
