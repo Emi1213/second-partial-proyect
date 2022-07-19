@@ -9,7 +9,7 @@ public class NumberSeats {
   int price;
 
   public int Destin(String line, int numberSeatsToSet) {
-    String[] arrayDestiny = line.split(";");
+    String[] arrayDestiny = line.split("/");
 
     this.cityName = arrayDestiny[0];
     this.cityCode = arrayDestiny[1];
