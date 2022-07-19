@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import EmployeesManagement.EmployeesManager;
 import TicketsSelling.Ticket;
 import utils.MenuType;
@@ -15,7 +14,6 @@ public class App {
      * @param args the command line arguments
      * @return void
      */
-
     public static void main(String[] args) {
         System.out.println("\n\nBienvenido al Proyecto del Segundo Parcial de Algoritmos y Lógica de Programación\n\n");
         System.out.println("Elije una opción para empezar\n");
@@ -24,7 +22,7 @@ public class App {
 
         do {
             MenuType.showMenu("main");
-            option = UserInput.getUserOption(scan);
+            option = UserInput.getUserOption(scan, new int[] { 1, 4 });
 
             switch (option) {
                 case 1:
@@ -39,11 +37,7 @@ public class App {
                 case 4:
                     System.out.println("\nEs un gusto tenerte en nuestra aplicación, hasta pronto!\n");
                     break;
-                default:
-                    System.out.println("\nEsa opción no existe, intenta de nuevo\n");
-                    break;
             }
-
         } while (option != 4);
     }
 
