@@ -5,6 +5,7 @@ import utils.*;
 public class Credentials {
 
   String arrayCredentials[] = new String[6];
+  boolean descountClients = false;
 
   /**
    * @description This method is used to get the credentials of the user
@@ -26,7 +27,7 @@ public class Credentials {
     String regexAge = "^[0-9]{1,2}$";
     String regexCellPhone = "^[0-9]{10}$";
     String regexEmail = "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$";
-    String[] codesClients = { " 1413", "1420", "1515", "1710", "1616", "1855" };
+    String[] codesClients = { " 1851047363", "1710550607", "1802641322" };
 
     String customErrorMessage = "El dato ingresado no es válido, intenta de nuevo";
 
@@ -45,6 +46,13 @@ public class Credentials {
         case 2:
           ID = UserInput.getUserParam("Ingresa tu identificación: ", regexID, customErrorMessage);
           arrayCredentials[i] = ID;
+          for (int j = 0; j < codesClients.length; j++) {
+            if (ID.equals(codesClients[j])) {
+              descountClients = true;
+            } else {
+              descountClients = false;
+            }
+          }
           break;
 
         case 3:
@@ -73,5 +81,9 @@ public class Credentials {
    */
   public String[] getArrayCredentials() {
     return arrayCredentials;
+  }
+
+  public Boolean getDescountClients() {
+    return descountClients;
   }
 }

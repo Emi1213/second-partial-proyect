@@ -5,17 +5,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import utils.UserInput;
+import java.util.ArrayList;
 
 public class Destinos {
 
-  String[] descountDestiny = { "151536", "171050", "185572" };
-  String[] descountClients = { " 1413", "1515", "1710", "1855" };
+  boolean exit = false;
+  String[] codetDestiny = { "17", "13", "09", "07" };
   String regexdate = "^[0-9]{2}-[0-9]{2}-[0-9]{4}$";
   String regexnumberSeats = "^[0-9]{1,2}$";
   String regexDestinyName = "^[a-zA-Z]{1,20}$";
   String customErrorMessage = "El dato ingresado no es válido, intenta de nuevo";
+  String[] destination = { " Quito/17/60/$5/$3",
+      " Manta/13/40/$7/$5", " Loja/11/50/$10/$8", " Guayaquil/09/30/$5/$3", " Cuenca/01/40/$7/$5",
+      "Macas/14/50/$9/$7", "Riobamba/06/60/$7/$5", "Machala/07/40/$3/$5", "Latacunga/05/50/$4/$3",
+      "Ibarra/10/60/$7/$5" };
 
   /**
    * @description This method is used to show the destinations from the file
@@ -33,25 +36,18 @@ public class Destinos {
         FileWriter writer = new FileWriter(file);
 
         writer.write("\n\n");
-        writer.write("*********************************************************");
-        writer.write("*                                                       *");
-        writer.write("*               Lista de destinos                       *");
-        writer.write("*                                                       *");
-        writer.write("*********************************************************");
+        writer.write("*********************************************************\n");
+        writer.write("*                                                       *\n");
+        writer.write("*               Lista de destinos                       *\n");
+        writer.write("*                                                       *\n");
+        writer.write("*********************************************************\n");
         writer.write("\n\n");
 
-        writer.write(" Ciudad  \t Codigo \t Numero de Asientos \t Precio normal \t Precio por grupos \n");
+        writer.write(" Ciudad/Codigo/Numero de Asientos/Precio normal/Precio por grupos \n");
 
-        writer.write(" Quito    \t 171050 \t     60             \t   $5          \t      $3\n");
-        writer.write(" Manta    \t 161514 \t     40             \t   $7          \t      $5\n");
-        writer.write(" Cuenca   \t 185572 \t     55             \t   $9          \t      $7\n");
-        writer.write(" Macas    \t 141536 \t     50             \t   $9          \t      $7\n");
-        writer.write(" Guayaquil\t 151536 \t     45             \t   $5          \t      $3\n");
-        writer.write(" Loja     \t 171536 \t     60             \t   $10         \t      $8\n");
-        writer.write(" Manabi   \t 181536 \t     55             \t   $12         \t      $10\n");
-        writer.write(" Ibarra   \t 191536 \t     50             \t   $12         \t      $10\n");
-        writer.write(" Zamora   \t 201536 \t     45             \t   $10         \t      $8\n");
-        writer.write(" Latacunga\t 211536 \t     60             \t   $3          \t      $2\n");
+        for (int i = 0; i < destination.length; i++) {
+          writer.write((i + 1) + "." + destination[i] + "\n");
+        }
         writer.close();
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -79,80 +75,134 @@ public class Destinos {
 
   }
 
-  // metodo que retorne una linkedlist con los destinos
+  ArrayList<String> listDestiny = new ArrayList<String>();
 
   public void getDestiny() {
 
-    int numDestiny;
-    String destiny;
-    String numberSeats;
-    String date;
-    String price;
-    boolean isValid = false;
-    boolean isValid2 = false;
-    String code;
-    int descountcity = 0;
+    String code = "";
+    boolean validation = false;
+    String line = "";
+    int numberSeatsToSet;
 
     do {
-      System.out.println("Ingrese el número de destinos que desea comprar");
-      numDestiny = Integer.parseInt(System.console().readLine());
+      try {
+        System.out.println("\n\n");
+        do {
+          System.out.println("Escoga el numero de destino que desea: ");
+          int destiny = Integer.parseInt(System.console().readLine());
+          switch (destiny) {
+            case 1:
+              line = destination[0];
+              listDestiny.add(line);
+              code = "17";
+              validation = true;
 
-      System.out.println("El numero a diferentes destinos es: " + numDestiny);
-      String answer = System.console().readLine();
-      if (answer.equalsIgnoreCase("si")) {
-        isValid = true;
-      } else if (answer.equalsIgnoreCase("no")) {
-        isValid = false;
-      } else {
-        System.out.println("Ingrese una opción válida");
+              break;
+            case 2:
+              line = destination[1];
+              listDestiny.add(line);
+              code = "13";
+              validation = true;
+              break;
+            case 3:
+              line = destination[2];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            case 4:
+              line = destination[3];
+              listDestiny.add(line);
+              code = "4";
+              validation = true;
+              break;
+            case 5:
+              line = destination[4];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            case 6:
+              line = destination[5];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            case 7:
+              line = destination[6];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            case 8:
+              line = destination[7];
+              listDestiny.add(line);
+              code = "09";
+              validation = true;
+              break;
+            case 9:
+              line = destination[8];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            case 10:
+              line = destination[9];
+              listDestiny.add(line);
+              validation = true;
+              break;
+            default:
+              System.out.println("El numero de destino ingresado no es valido, intente de nuevo");
+              break;
+          }
+        } while (!validation);
+
+        do {
+          System.out.println("Ingrese el numero de asientos que desea: ");
+          numberSeatsToSet = Integer.parseInt(System.console().readLine());
+          if (numberSeatsToSet > 0 && numberSeatsToSet <= 15) {
+            validation = true;
+          } else {
+            System.out.println("El numero de asientos ingresado no es valido, intente de nuevo");
+            validation = false;
+          }
+        } while (!validation);
+
+        NumberSeats numberSeats = new NumberSeats();
+
+        int price = numberSeats.Destin(line, numberSeatsToSet);
+
+        // for (int k = 0; k < codetDestiny.length; k++) {
+        // if (codetDestiny[k].equals(code)) {
+
+        // }
+        // }
+
+        do {
+          System.out.println("Desea ingresar otro destino? (Si/No)");
+          String answer3 = System.console().readLine();
+
+          if (answer3.equalsIgnoreCase("si")) {
+            validation = true;
+          } else if (answer3.equalsIgnoreCase("no")) {
+            validation = true;
+            exit = true;
+          } else {
+            System.out.println(customErrorMessage);
+          }
+        } while (!validation);
+
+      } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+
       }
-    } while (!isValid);
-
-    String[] destinos = new String[numDestiny];
-
-    for (int i = 0; i < numDestiny; i++) {
-      do {
-
-        destiny = UserInput.getUserParam("Ingresa el destino " + i + ":", regexDestinyName, customErrorMessage);
-        do {
-          numberSeats = UserInput.getUserParam("Ingresa el número de asientos:", regexnumberSeats, customErrorMessage);
-          if (Integer.parseInt(numberSeats) >= 4 && Integer.parseInt(numberSeats) <= 60) {
-            price = "mayor";
-            isValid2 = true;
-          } else if (Integer.parseInt(numberSeats) <= 4 && Integer.parseInt(numberSeats) >= 1) {
-            price = "menor";
-            isValid2 = true;
-          } else {
-            System.out.println("Ingrese un número de asientos válido");
-            isValid2 = false;
-          }
-        } while (!isValid2);
-        date = UserInput.getUserParam("Ingresa la fecha de viaje:", regexdate, customErrorMessage);
-
-        if (destiny.equalsIgnoreCase("Quito")) {
-          code = "171050";
-
-        }
-
-        do {
-          System.out.println("Los datos del destino " + i + " son: \n" + "Destino: " + destiny
-              + "\n Numero de asientos: " + numberSeats + "\n Fecha de viaje: " + date
-              + "Si/No: ");
-          String answer2 = System.console().readLine();
-          if (answer2.equalsIgnoreCase("si")) {
-            isValid2 = true;
-            isValid = true;
-          } else if (answer2.equalsIgnoreCase("no")) {
-            isValid2 = false;
-            continue;
-          } else {
-            System.out.println("Ingrese una opción válida");
-          }
-        } while (!isValid2);
-
-      } while (!isValid);
-
-    }
+    } while (!exit);
 
   }
+
+  // public static void getPoints(String line, int numberSeats) {
+  // String[] dates = line.split("/");
+  // int normalPrice = Integer.parseInt(dates[3]);
+  // int groupPrice = Integer.parseInt(dates[4]);
+  // int price = 0;
+  // if (numberSeats <= 4) {
+
+  // price = groupPrice * numberSeats;
+  // }
+  // }
 }

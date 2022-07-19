@@ -26,15 +26,20 @@ public class Ticket {
 
       System.out.println("\n\n");
       System.out
-          .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos");
+          .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos\n");
 
       credentials.getCredentials();
+      boolean descount = credentials.getDescountClients();
 
       String[] userCredentials = credentials.getArrayCredentials();
 
       System.out.println("\n\n");
 
       destinos.showDestinos();
+      destinos.getDestiny();
+
+      Descounts descounts = new Descounts();
+      descounts.getDescounts(descount);
 
       Ticket.showFacture(userCredentials);
 
