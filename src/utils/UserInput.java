@@ -29,6 +29,21 @@ public class UserInput {
   }
 
   /**
+   * Gets the user option
+   * 
+   * @return {int} The user option
+   */
+  public static int getUserOption() {
+    try {
+      return Integer.valueOf(System.console().readLine().trim().replaceAll("\\D*", ""));
+    } catch (Exception e) {
+      System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
+      System.out.println("Debes ingresar un número de opción correcto\n\n");
+      return 0;
+    }
+  }
+
+  /**
    * @description Gets the s/n user option whit validation
    *
    * @return boolean The user option
@@ -40,7 +55,7 @@ public class UserInput {
 
     do {
       try {
-        userSNOption = System.console().readLine().replaceAll("\\D*", "").toLowerCase();
+        userSNOption = System.console().readLine().replaceAll("\\d*", "").toLowerCase();
 
         if (userSNOption.equals("s") || userSNOption.equals("n") || userSNOption.equals("si")
             || userSNOption.equals("no")) {
@@ -70,6 +85,7 @@ public class UserInput {
 
   /**
    * @description Gets the user param (name, last name, ID, email, etc)
+   * 
    * @param customMessage      Custom message to show to the user
    * @param regexParam         Regex to validate the user param
    * @param customErrorMessage Custom error message to show to the user
