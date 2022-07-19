@@ -7,15 +7,31 @@ import java.io.IOException;
 public class Facture {
 
   Credentials credentials = new Credentials();
-  String[] Credencials = credentials.getArrayCredentials();
 
-  String name = Credencials[0];
-  String lastName = Credencials[1];
-  String ID = Credencials[2];
-  String age = Credencials[3];
-  String phone = Credencials[4];
-  String email = Credencials[5];
+  String[] Credencials;
+  String name;
+  String lastName;
+  String ID;
+  String age;
+  String phone;
+  String email;
 
+  public void getCredentials() {
+    credentials.getCredentials();
+    Credencials = credentials.getArrayCredentials();
+    name = Credencials[0];
+    lastName = Credencials[1];
+    ID = Credencials[2];
+    age = Credencials[3];
+    phone = Credencials[4];
+    email = Credencials[5];
+
+  }
+
+  /**
+   * @description This method is used to give the facture electronic of the user
+   * @return void
+   */
   public void factureElectronic() {
 
     System.out.println("\n\n");
@@ -42,6 +58,11 @@ public class Facture {
 
   }
 
+  /**
+   * @description This method is used to give the facture fisic of the user
+   * 
+   * @return void
+   */
   public void factureFisic() throws IOException {
 
     File file = new File("src/TicketsSelling/Factura.txt");

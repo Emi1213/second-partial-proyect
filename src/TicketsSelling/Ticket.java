@@ -58,6 +58,10 @@ public class Ticket {
 
   }
 
+  /**
+   * @description This method is used to show the facture of the user
+   * @return void
+   */
   public void showFacture() throws IOException {
 
     Facture facture = new Facture();
