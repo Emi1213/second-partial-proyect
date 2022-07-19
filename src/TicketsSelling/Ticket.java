@@ -2,6 +2,7 @@ package TicketsSelling;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Ticket {
 
@@ -11,9 +12,8 @@ public class Ticket {
   public static void main(String[] args) throws IOException {
 
     Credentials credentials = new Credentials();
-    Destinos destinos = new Destinos(0);
+    Destinos destinos;
     boolean exit = false;
-    boolean validexit = false;
 
     System.out.println("*********************************************************");
     System.out.println("*                                                       *");
@@ -26,35 +26,18 @@ public class Ticket {
 
       System.out.println("\n\n");
       System.out
-          .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos");
+          .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos\n");
 
-      // credentials.getCredentials();
-
-      // String[] userCredentials = credentials.getArrayCredentials();
-
-      // System.out.println("\n\n");
+      credentials.getCredentials();
+      destinos = new Destinos(Integer.parseInt(credentials.getArrayCredentials()[6]));
 
       destinos.showDestinos();
+      ArrayList<Destino> totalDestinies = destinos.getDestinies();
 
-      // Ticket.showFacture(userCredentials);
-
-      // do {
-
-      // System.out.println("\n\n");
-
-      // System.out.println("¿Desea ejecutar esta opción otra vez? (si/no)");
-      // String answer = System.console().readLine().trim();
-
-      // if (answer.equalsIgnoreCase("si")) {
-      // validexit = true;
-      // } else if (answer.equalsIgnoreCase("no")) {
-      // validexit = true;
-      // exit = true;
-      // } else {
-      // System.out.println("Respuesta inválida, intente de nuevo");
-      // }
-
-      // } while (!validexit);
+      for (Destino destino : totalDestinies) {
+        System.out.println(destino.getCityName() + " " + destino.getCityCode() + " " + destino.getNumberSeats() + " "
+            + destino.getPrice());
+      }
     } while (!exit);
 
   }

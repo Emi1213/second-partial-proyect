@@ -4,18 +4,31 @@ public class Destino {
   String cityName;
   String cityCode;
   int numberSeats;
-  int normalPrice;
-  int groupPrice;
-  int numberSeatsToSet;
+  int price;
+  String dateToTravel;
 
-  public Destino(String line, int numberSeatsToSet) {
-    String[] arrayDestiny = line.split(";");
-
-    this.cityName = arrayDestiny[0];
-    this.cityCode = arrayDestiny[1];
-    this.numberSeats = Integer.parseInt(arrayDestiny[2]);
-    this.normalPrice = Integer.parseInt(arrayDestiny[3]);
-    this.groupPrice = Integer.parseInt(arrayDestiny[4]);
+  public Destino(String destinyInfoLine, int numberSeats, String dateToTravel) {
+    String[] destinyInfo = destinyInfoLine.split("/");
+    this.cityName = destinyInfo[0];
+    this.cityCode = destinyInfo[1];
+    this.numberSeats = numberSeats;
+    this.price = (numberSeats > 4 ? Integer.parseInt(destinyInfo[4]) : Integer.parseInt(destinyInfo[3])) * numberSeats;
+    this.dateToTravel = dateToTravel;
   }
 
+  public String getCityName() {
+    return cityName;
+  }
+
+  public String getCityCode() {
+    return cityCode;
+  }
+
+  public int getNumberSeats() {
+    return numberSeats;
+  }
+
+  public int getPrice() {
+    return price;
+  }
 }

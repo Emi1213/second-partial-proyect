@@ -30,10 +30,10 @@ public class App {
 
             switch (option) {
                 case 1:
-                    Ticket.main(null);
+                    FilesManagement.main(null);
                     break;
                 case 2:
-                    FilesManagement.main(null);
+                    Ticket.main(null);
                     break;
                 case 3:
                     EmployeesManager.main(null);

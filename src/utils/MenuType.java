@@ -10,9 +10,9 @@ public class MenuType {
   public static void showMenu(String menuType) {
     switch (menuType) {
       case "main":
-        System.out.println("\t1. Tickets Selling");
-        System.out.println("\t2. Files Management");
-        System.out.println("\t3. Tercera opción");
+        System.out.println("\t1. Manejo de Ficheros");
+        System.out.println("\t2. Venta de Tickets");
+        System.out.println("\t3. Administración de Empleados");
         System.out.println("\t4. Salir");
         break;
 
