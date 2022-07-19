@@ -1,6 +1,5 @@
 package FilesManagement;
 
-import java.awt.Color;
 import java.io.File;
 import utils.Colors;
 
@@ -33,7 +32,7 @@ public class Options {
         do {
             System.out.println("\nSeleccione una opción:");
             for (int i = 0; i < OPTIONS.length; i++) {
-                System.out.println(Colors.ANSI_BLACK + OPTIONS[i]);
+                System.out.println(Colors.ANSI_PURPLE + OPTIONS[i] + Colors.ANSI_RESET);
             }
             option = Integer.parseInt(System.console().readLine());
             if (option > 8 || option < 1) {

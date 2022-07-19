@@ -264,7 +264,8 @@ public class FileCreation {
             }
         }
         String[] filesString = new String[directories.size()];
-        System.out.println("\nTe encuentras en el directorio: " + file.getName() + "\n");
+        System.out.println(
+                "\nTe encuentras en el directorio: " + file.getName() + "\n");
         for (int i = 0; i < directories.size(); i++) {
             filesString[i] = (" " + (i + 1) + ". " + showFilesPropities(directories.get(i)));
         }
@@ -286,7 +287,7 @@ public class FileCreation {
             }
         }
         String[] filesString = new String[directories.size()];
-        System.out.println("\nTe encuentras en el directorio: " + file.getName() + ", contiene las carpetas:\n");
+        System.out.println("\nTe encuentras e n  el directorio: " + file.getName() + ", contiene las carpetas:\n");
         for (int i = 0; i < filesString.length; i++) {
             filesString[i] = (" " + (i + 1) + ". " + showFilesPropities(directories.get(i)));
             System.out.println(filesString[i]);
