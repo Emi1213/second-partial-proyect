@@ -3,8 +3,7 @@ package TicketsSelling;
 import utils.*;
 
 public class Credentials {
-
-  String arrayCredentials[] = new String[6];
+  String arrayCredentials[] = new String[7];
 
   /**
    * @description This method is used to get the credentials of the user
@@ -19,6 +18,7 @@ public class Credentials {
     String age = "";
     String cellPhone = "";
     String email = "";
+    int destinationsQuantity;
 
     String regexName = "^[A-Z]{1}[a-z]{1,}$";
     String regexLastName = "^[A-Z]{1}[a-z]{1,}$";
@@ -60,6 +60,12 @@ public class Credentials {
         case 5:
           email = UserInput.getUserParam("Ingresa tu email: ", regexEmail, customErrorMessage);
           arrayCredentials[i] = email;
+          break;
+        case 6:
+          destinationsQuantity = Integer
+              .parseInt(UserInput.getUserParam("Ingresa la cantidad de destinos que deseas comprar: ",
+                  regexAge, customErrorMessage));
+          arrayCredentials[i] = Integer.toString(destinationsQuantity);
           break;
 
       } // end switch

@@ -11,7 +11,7 @@ public class Ticket {
   public static void main(String[] args) throws IOException {
 
     Credentials credentials = new Credentials();
-    Destinos destinos = new Destinos();
+    Destinos destinos = new Destinos(0);
     boolean exit = false;
     boolean validexit = false;
 
@@ -28,33 +28,33 @@ public class Ticket {
       System.out
           .println("Ingresa tus datos para poder comprar boletos\n Nota: La factura será generada con estos datos");
 
-      credentials.getCredentials();
+      // credentials.getCredentials();
 
-      String[] userCredentials = credentials.getArrayCredentials();
+      // String[] userCredentials = credentials.getArrayCredentials();
 
-      System.out.println("\n\n");
+      // System.out.println("\n\n");
 
       destinos.showDestinos();
 
-      Ticket.showFacture(userCredentials);
+      // Ticket.showFacture(userCredentials);
 
-      do {
+      // do {
 
-        System.out.println("\n\n");
+      // System.out.println("\n\n");
 
-        System.out.println("¿Desea ejecutar esta opción otra vez? (si/no)");
-        String answer = System.console().readLine().trim();
+      // System.out.println("¿Desea ejecutar esta opción otra vez? (si/no)");
+      // String answer = System.console().readLine().trim();
 
-        if (answer.equalsIgnoreCase("si")) {
-          validexit = true;
-        } else if (answer.equalsIgnoreCase("no")) {
-          validexit = true;
-          exit = true;
-        } else {
-          System.out.println("Respuesta inválida, intente de nuevo");
-        }
+      // if (answer.equalsIgnoreCase("si")) {
+      // validexit = true;
+      // } else if (answer.equalsIgnoreCase("no")) {
+      // validexit = true;
+      // exit = true;
+      // } else {
+      // System.out.println("Respuesta inválida, intente de nuevo");
+      // }
 
-      } while (!validexit);
+      // } while (!validexit);
     } while (!exit);
 
   }
