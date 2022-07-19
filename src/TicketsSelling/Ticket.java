@@ -12,7 +12,6 @@ public class Ticket {
 
     Credentials credentials = new Credentials();
     Destinos destinos = new Destinos();
-    Ticket tickets = new Ticket();
     boolean exit = false;
     boolean validexit = false;
 
@@ -31,11 +30,13 @@ public class Ticket {
 
       credentials.getCredentials();
 
+      String[] userCredentials = credentials.getArrayCredentials();
+
       System.out.println("\n\n");
 
       destinos.showDestinos();
 
-      tickets.showFacture();
+      Ticket.showFacture(userCredentials);
 
       do {
 
@@ -59,12 +60,17 @@ public class Ticket {
   }
 
   /**
-   * @description This method is used to show the facture of the user
-   * @return void
+   * This method is used to show the facture with the user credentials that is
+   * already entered by the user
+   *
+   * @param userCredentials - array with user credentials (name, lastName, ID,
+   *                        age, phone, email) to use in the Facture
+   * @throws IOException
    */
-  public void showFacture() throws IOException {
+  public static void showFacture(String[] userCredentials) throws IOException {
 
-    Facture facture = new Facture();
+    Facture facture = new Facture(userCredentials[0], userCredentials[1], userCredentials[2],
+        userCredentials[3], userCredentials[4], userCredentials[5]);
 
     System.out.println("\n\n");
     System.out.println("Desea su factura fisica o electronica? (fisica/electronica)");

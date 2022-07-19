@@ -6,11 +6,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import utils.UserInput;
+
 public class Destinos {
 
   String[] descountDestiny = { "151536", "171050", "185572" };
   String[] descountClients = { " 1413", "1515", "1710", "1855" };
   String regexdate = "^[0-9]{2}-[0-9]{2}-[0-9]{4}$";
+  String regexnumberSeats = "^[0-9]{1,2}$";
+  String regexDestinyName = "^[a-zA-Z]{1,20}$";
+  String customErrorMessage = "El dato ingresado no es válido, intenta de nuevo";
 
   /**
    * @description This method is used to show the destinations from the file
@@ -81,7 +86,12 @@ public class Destinos {
     int numDestiny;
     String destiny;
     String numberSeats;
+    String date;
+    String price;
     boolean isValid = false;
+    boolean isValid2 = false;
+    String code;
+    int descountcity = 0;
 
     do {
       System.out.println("Ingrese el número de destinos que desea comprar");
@@ -102,10 +112,43 @@ public class Destinos {
 
     for (int i = 0; i < numDestiny; i++) {
       do {
-        System.out.println("Ingrese el primer destino");
-        destiny = System.console().readLine();
-        System.out.println("Ingrese el numero de asientos para el destino: " + destiny);
-        numberSeats = System.console().readLine();
+
+        destiny = UserInput.getUserParam("Ingresa el destino " + i + ":", regexDestinyName, customErrorMessage);
+        do {
+          numberSeats = UserInput.getUserParam("Ingresa el número de asientos:", regexnumberSeats, customErrorMessage);
+          if (Integer.parseInt(numberSeats) >= 4 && Integer.parseInt(numberSeats) <= 60) {
+            price = "mayor";
+            isValid2 = true;
+          } else if (Integer.parseInt(numberSeats) <= 4 && Integer.parseInt(numberSeats) >= 1) {
+            price = "menor";
+            isValid2 = true;
+          } else {
+            System.out.println("Ingrese un número de asientos válido");
+            isValid2 = false;
+          }
+        } while (!isValid2);
+        date = UserInput.getUserParam("Ingresa la fecha de viaje:", regexdate, customErrorMessage);
+
+        if (destiny.equalsIgnoreCase("Quito")) {
+          code = "171050";
+
+        }
+
+        do {
+          System.out.println("Los datos del destino " + i + " son: \n" + "Destino: " + destiny
+              + "\n Numero de asientos: " + numberSeats + "\n Fecha de viaje: " + date
+              + "Si/No: ");
+          String answer2 = System.console().readLine();
+          if (answer2.equalsIgnoreCase("si")) {
+            isValid2 = true;
+            isValid = true;
+          } else if (answer2.equalsIgnoreCase("no")) {
+            isValid2 = false;
+            continue;
+          } else {
+            System.out.println("Ingrese una opción válida");
+          }
+        } while (!isValid2);
 
       } while (!isValid);
 

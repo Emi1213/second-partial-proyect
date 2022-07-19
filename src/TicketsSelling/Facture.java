@@ -16,6 +16,25 @@ public class Facture {
   String phone;
   String email;
 
+  /**
+   * This constructor is used to initialize the variables of the class
+   * 
+   * @param name
+   * @param lastName
+   * @param ID
+   * @param age
+   * @param phone
+   * @param email
+   */
+  public Facture(String name, String lastName, String ID, String age, String phone, String email) {
+    this.name = name;
+    this.lastName = lastName;
+    this.ID = ID;
+    this.age = age;
+    this.phone = phone;
+    this.email = email;
+  }
+
   public void getCredentials() {
     credentials.getCredentials();
     Credencials = credentials.getArrayCredentials();
@@ -33,7 +52,6 @@ public class Facture {
    * @return void
    */
   public void factureElectronic() {
-
     System.out.println("\n\n");
     System.out.println("*********************************************************");
     System.out.println("*                                                       *");
@@ -55,7 +73,6 @@ public class Facture {
     System.out.println("*     Correo electrónico:" + email);
     System.out.println("*     Telefono: " + phone + "\n");
     System.out.println("*********************************************************");
-
   }
 
   /**
@@ -64,7 +81,6 @@ public class Facture {
    * @return void
    */
   public void factureFisic() throws IOException {
-
     File file = new File("src/TicketsSelling/Factura.txt");
     file.createNewFile();
     FileWriter writer = new FileWriter(file);
@@ -89,7 +105,6 @@ public class Facture {
     writer.write("*     Correo electrónico:" + email);
     writer.write("*     Telefono: " + phone + "\n");
     writer.write("*********************************************************");
-
     writer.close();
   }
 }
