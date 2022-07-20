@@ -15,6 +15,7 @@ public class Ticket {
     Descounts descounts = new Descounts();
     Destinos destinos;
     boolean exit = false;
+    boolean isValid = false;
 
     System.out.println("*********************************************************");
     System.out.println("*                                                       *");
@@ -34,6 +35,7 @@ public class Ticket {
 
       destinos.showDestinos();
       ArrayList<Destino> totalDestinies = destinos.getDestinies();
+
       descounts.getSecondDescount(credentials.getDestinationsQuantity());
       descounts.getDescounts(credentials.getDescountClients());
 
@@ -41,6 +43,26 @@ public class Ticket {
         System.out.println(destino.getCityName() + " " + destino.getCityCode() + " " + destino.getNumberSeats() + " "
             + destino.getPrice());
       }
+      showFacture(credentials.getArrayCredentials());
+
+      do {
+        try {
+          System.out.println("\n\n");
+          System.out.println("¿Desea desea igresar otra factura? (si/no)");
+          String answer4 = System.console().readLine();
+          if (answer4.equalsIgnoreCase("si")) {
+            isValid = true;
+          } else if (answer4.equalsIgnoreCase("no")) {
+            isValid = true;
+            exit = true;
+          } else {
+            System.out.println("\n\n");
+            System.out.println("Ingrese una opcion valida");
+          }
+        } catch (Exception e) {
+          System.out.println("Error: " + e.getMessage());
+        }
+      } while (!isValid);
     } while (!exit);
 
   }

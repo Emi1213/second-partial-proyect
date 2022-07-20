@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Facture {
-  ArrayList<Destino> arrayDescounts;
+  ArrayList<Destino> arrayDescounts = new ArrayList<>();
 
   Credentials credentials = new Credentials();
   Descounts descounts = new Descounts();
