@@ -1,0 +1,10 @@
+ Quito;17;60;5;3
+ Manta;13;40;7;5
+ Cuenca;01;55;9;7
+ Macas;14;50;9;7
+ Guayaquil;09;45;5;3
+ Loja;11;60;10;8
+ Machala;07;55;12;10
+ Ibarra;10;50;12;10
+ Riobamba1;06;45;10;8
+ Latacunga;05;60;3;2

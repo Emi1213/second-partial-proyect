@@ -35,6 +35,7 @@ public class UserInput {
    */
   public static int getUserOption() {
     try {
+      System.out.print("\t-> ");
       return Integer.valueOf(System.console().readLine().trim().replaceAll("\\D*", ""));
     } catch (Exception e) {
       System.out.println(Colors.ANSI_RED + "\n\t-> Opción inválida, vuelve a intentar\n" + Colors.ANSI_RESET);
