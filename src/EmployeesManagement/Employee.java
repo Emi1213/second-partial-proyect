@@ -37,6 +37,21 @@ public class Employee {
     this.UID = generateUID();
   }
 
+  public Employee(String employeeName, String lastEmployeeName, String employeeAge, String yearsOfExperience,
+      String UID, String employeeEmail, String employeePhone, String employeeAddress, String employeeLevel,
+      String employeeDNI) {
+    this.employeeName = employeeName;
+    this.lastEmployeeName = lastEmployeeName;
+    this.employeeAge = Integer.parseInt(employeeAge);
+    this.yearsOfExperience = Integer.parseInt(yearsOfExperience);
+    this.employeePhone = employeePhone;
+    this.employeeAddress = employeeAddress;
+    this.employeeDNI = employeeDNI;
+    this.employeeLevel = employeeLevel;
+    this.employeeEmail = employeeEmail;
+    this.UID = UID;
+  }
+
   /**
    * Generates the current employee level
    * 
@@ -87,9 +102,15 @@ public class Employee {
    * @return String
    */
   public String toString() {
-    return employeeName + ";" + lastEmployeeName + ";" + employeeAge + ";" + yearsOfExperience + ";"
-        + UID + ";" + employeeEmail + ";" + employeePhone + ";" + employeeAddress + ";"
-        + employeeLevel + ";" + employeeDNI;
+    return "Nombre: " + employeeName + "\nApellido: " + lastEmployeeName + "\nEdad: " + employeeAge
+        + "\nAños de experiencia: " + yearsOfExperience + "\nDNI: " + employeeDNI + "\nTeléfono: "
+        + employeePhone + "\nDirección: " + employeeAddress + "\nNivel: " + employeeLevel + "\nEmail: "
+        + employeeEmail + "\nUID: " + UID;
+  }
+
+  public String toString(boolean oneLine) {
+    return employeeName + ";" + lastEmployeeName + ";" + employeeAge + ";" + yearsOfExperience + ";" + UID + ";"
+        + employeeEmail + ";" + employeePhone + ";" + employeeAddress + ";" + employeeLevel + ";" + employeeDNI;
   }
 
   // Getters
@@ -136,10 +157,12 @@ public class Employee {
   // Setters
   public void setEmployeeName(String employeeName) {
     this.employeeName = employeeName;
+    this.employeeEmail = generateEmail(employeeName, lastEmployeeName);
   }
 
   public void setLastEmployeeName(String lastEmployeeName) {
     this.lastEmployeeName = lastEmployeeName;
+    this.employeeEmail = generateEmail(employeeName, lastEmployeeName);
   }
 
   public void setEmployeeAge(int employeeAge) {

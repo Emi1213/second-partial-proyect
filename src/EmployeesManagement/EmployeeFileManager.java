@@ -15,18 +15,36 @@ public class EmployeeFileManager {
   public static BufferedReader br;
   public static ArrayList<Employee> employees = new ArrayList<Employee>();
 
-  public EmployeeFileManager() {
-    try {
-      if (!FILE.exists()) {
-        FILE.createNewFile();
-        System.out.println("Archivo creado");
-      } else {
-        System.out.println("Archivo existente");
-      }
+  public static boolean fillEmployees() {
+    if (FILE.exists()) {
+      try {
+        fr = new FileReader(FILE);
+        br = new BufferedReader(fr);
+        String line;
+        while ((line = br.readLine()) != null) {
+          String[] data = line.split(";");
 
-    } catch (IOException e) {
-      e.printStackTrace();
+          employees.add(
+              new Employee(
+                  data[0],
+                  data[1],
+                  data[2],
+                  data[3],
+                  data[4],
+                  data[5],
+                  data[6],
+                  data[7],
+                  data[8],
+                  data[9]));
+        }
+
+        return true;
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
+
+    return false;
   }
 
   public static void addEmployee(Employee employee) {
@@ -49,56 +67,53 @@ public class EmployeeFileManager {
     return false;
   }
 
-  public static void modifyEmployee(String UID, String paramToModify) {
+  public static void modifyEmployee(String UID, int paramToModify) {
     for (Employee employee : employees) {
-      if (employee.getUID() == UID) {
+      if (employee.getUID().equals(UID)) {
         switch (paramToModify) {
-          case "nombre":
+          case 1:
             employee.setEmployeeName(
                 UserInput.getUserParam("Ingresa el nombre", "^[A-Z]{1}[a-z]{2,}$", "Procura ingresa un nombre válido"));
             break;
 
-          case "apellido":
+          case 2:
             employee.setLastEmployeeName(UserInput.getUserParam("Ingresa el apellido", "^[A-Z]{1}[a-z]{2,}$",
                 "Procura ingresa un apellido válido"));
             break;
 
-          case "edad":
-            employee.setEmployeeAge(
-                Integer.parseInt(
-                    UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida")));
-            break;
-
-          case "años de experiencia":
-            employee
-                .setYearsOfExperience(Integer.parseInt(
-                    UserInput.getUserParam("Ingresa los años de experiencia", "[0-9]{1,2}*",
-                        "Procura ingresa un valor válido")));
-            break;
-
-          case "teléfono":
+          case 3:
             employee.setEmployeePhone(
                 UserInput.getUserParam("Ingresa el teléfono", "^[0-9]{10}$", "Procura ingresa un teléfono válido"));
             break;
 
-          case "dirección":
+          case 4:
             employee.setEmployeeAddress(
                 UserInput.getUserParam("Ingresa la dirección", "[a-zA-Z0-9\\s]",
                     "Procura ingresa una dirección válida"));
             break;
 
-          case "dni":
+          case 5:
             employee
                 .setEmployeeDNI(UserInput.getUserParam("Ingresa el DNI", "[0-9]{10}", "Procura ingresa un DNI válido"));
+            break;
+
+          default:
+            System.out.println(Colors.ANSI_RED + "\n-> No se encontró el parámetro a modificar\n"
+                + Colors.ANSI_RESET);
             break;
         }
       }
     }
+
+    System.out.println(Colors.ANSI_GREEN + "\n-> Empleado modificado correctamente\n" + Colors.ANSI_RESET);
+    System.out.println("La nueva información del empleado es: \n");
+    showArbitraryEmployee(UID);
   }
 
   public static void generateReportInCSV() {
     if (employees.size() == 0) {
-      System.out.println("No hay empleados para generar el reporte");
+      System.out.println(Colors.ANSI_RED + "\n-> No hay empleados para generar el reporte\n"
+          + Colors.ANSI_RESET);
     } else {
       try {
         fw = new FileWriter(FILE);
@@ -107,15 +122,27 @@ public class EmployeeFileManager {
         String line;
 
         for (Employee employee : employees) {
-          line = employee.toString();
+          line = employee.toString(true);
           pw.println(line);
         }
 
         pw.close();
         fw.close();
+
+        System.out.println(Colors.ANSI_GREEN + "\n-> Reporte generado correctamente\n" + Colors.ANSI_RESET);
       } catch (IOException e) {
-        System.out.println("Error al leer el archivo " + FILE_NAME);
+        System.out.println(Colors.ANSI_RED + "Error al leer el archivo " + FILE_NAME + Colors.ANSI_RESET);
       }
     }
   }
+
+  public static void showArbitraryEmployee(String UID) {
+    for (Employee employee : employees) {
+      if (employee.getUID().equals(UID)) {
+        System.out.println(employee.toString());
+        return;
+      }
+    }
+  }
+
 }

@@ -28,12 +28,10 @@ public class MenuType {
         System.out.println("\t¿Qué desea modificar?");
         System.out.println("\t1. Nombre");
         System.out.println("\t2. Apellido");
-        System.out.println("\t3. Edad");
-        System.out.println("\t4. Años de experiencia");
-        System.out.println("\t5. Teléfono");
-        System.out.println("\t6. Dirección");
-        System.out.println("\t7. DNI");
-        System.out.println("\t8. Cancelar");
+        System.out.println("\t3. Teléfono");
+        System.out.println("\t4. Dirección");
+        System.out.println("\t5. DNI");
+        System.out.println("\t6. Cancelar");
         break;
     }
   }

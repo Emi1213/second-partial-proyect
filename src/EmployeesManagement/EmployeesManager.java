@@ -9,6 +9,8 @@ public class EmployeesManager {
   public static void main(String[] args) {
     System.out.println("\n\nBienvenido al Sistema de Gestión de Empleados\n");
 
+    EmployeeFileManager.fillEmployees();
+
     int option;
 
     do {
@@ -29,17 +31,16 @@ public class EmployeesManager {
 
           do {
             String UID = UserInput.getUserParam("\nIngrese el UID del empleado que desea eliminar",
-                "^[a-zA-z0-9\\s]{1,}$", "Procura ingresar un UID válido");
+                "^[0-9]{3}-[A-Z]{3}", "Procura ingresar un UID válido en el formato: 111-AAA");
 
             if (!EmployeeFileManager.deleteEmployee(UID)) {
               System.out.print(Colors.ANSI_GREEN +
                   "\n¿Desea volver a intentarlo? (Si/No): " + Colors.ANSI_RESET);
-              String answer = scan.nextLine();
+              boolean answer = UserInput.getSNUserOption();
 
-              if (answer.equalsIgnoreCase("No")) {
+              if (!answer) {
                 break;
               }
-
             } else {
               break;
             }
@@ -48,14 +49,17 @@ public class EmployeesManager {
 
         case 3:
           System.out.println("\n\n");
-          System.out.print("Ingrese el UID del empleado que desea modificar: ");
-          String uid2 = scan.nextLine();
-          System.out.println("\n");
+          String uid2 = UserInput.getUserParam("Ingrese el UID del empleado que desea modificar", "^[0-9]{3}-[A-Z]{3}",
+              "Procura ingresar un UID válido en el formato: 111-AAA");
+
+          System.out.println();
 
           MenuType.showMenu("modifyEmployee");
-          String paramToModify = scan.nextLine();
 
-          EmployeeFileManager.modifyEmployee(uid2, paramToModify.toLowerCase().trim());
+          int paramToModify = Integer
+              .parseInt(UserInput.getUserParam("Ingresa tu opción", "^[1-6]", "Procura ingresar una opción válida"));
+
+          EmployeeFileManager.modifyEmployee(uid2, paramToModify);
           break;
 
         case 4:
@@ -71,23 +75,43 @@ public class EmployeesManager {
   }
 
   public static Employee getEmployeeInfo() {
-    System.out.println("\n\nPara agregar un nuevo empleado, ingrese los siguientes datos:\n");
+    System.out.println(Colors.ANSI_GREEN + "\nIngresa los siguientes datos del empleado\n" + Colors.ANSI_RESET);
 
-    String employeeName = UserInput.getUserParam("Ingresa el nombre", "^[A-Z]{1}[a-z]{2,}$",
-        "Procura ingresa un nombre válido");
+    String employeeName = UserInput.getUserParam("Ingresa el nombre", "^[A-Z]{1}[a-z|áéíóú]{1,15}",
+        "Procura ingresa un nombre válido. Ejemplo: Juan");
 
-    String employeeLastName = UserInput.getUserParam("Ingresa el apellido", "^[A-Z]{1}[a-z]{2,}$",
-        "Procura ingresa un apellido válido");
+    String employeeLastName = UserInput.getUserParam("Ingresa el apellido", "^[A-Z]{1}[a-z|áéíóú]{1,15}$",
+        "Procura ingresa un apellido válido. Ejemplo: Pérez");
 
     int employeeAge = Integer
-        .parseInt(UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida"));
+        .parseInt(
+            UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida. Ejemplo: 20"));
 
-    int employeeYearsOfExperience = Integer.parseInt(
-        UserInput.getUserParam("Ingresa los años de experiencia", "[0-9]{1,2}",
-            "Procura ingresa un valor válido"));
+    int employeeYearsOfExperience;
 
-    String employeePhone = UserInput.getUserParam("Ingresa el teléfono", "^[0-9]{10}$",
-        "Procura ingresa un teléfono válido");
+    do {
+      employeeYearsOfExperience = Integer.parseInt(
+          UserInput.getUserParam("Ingresa los años de experiencia", "[0-9]{1,2}",
+              "Procura ingresa un valor válido"));
+
+      if (employeeYearsOfExperience < 0) {
+        System.out.println(Colors.ANSI_RED + "\n-> Recuerda ingresar datos que tengan sentido\n"
+            + Colors.ANSI_RESET);
+        continue;
+      }
+
+      if (employeeAge - employeeYearsOfExperience < 17) {
+        System.out
+            .println(Colors.ANSI_RED + "\n-> El empleado debería tener una edad y años de experiencia coherentes.\n"
+                + Colors.ANSI_RESET);
+        continue;
+      }
+
+      break;
+    } while (true);
+
+    String employeePhone = UserInput.getUserParam("Ingresa el teléfono", "^[0][0-9]{9}$",
+        "Procura ingresar un teléfono válido");
 
     String employeeAddress = UserInput.getUserParam("Ingresa la dirección", "[a-zA-Z0-9\\s]{1,}",
         "Procura ingresa una dirección válida");
@@ -98,10 +122,5 @@ public class EmployeesManager {
         employeePhone, employeeAddress, employeeDNI);
 
     return employee;
-  }
-
-  public static void getUserInput() {
-    scan.nextLine();
-    System.out.print("\nIngrese una opción: ");
   }
 }

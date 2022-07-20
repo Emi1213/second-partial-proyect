@@ -37,8 +37,7 @@ public class UserInput {
     try {
       return Integer.valueOf(System.console().readLine().trim().replaceAll("\\D*", ""));
     } catch (Exception e) {
-      System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-      System.out.println("Debes ingresar un número de opción correcto\n\n");
+      System.out.println(Colors.ANSI_RED + "\n\t-> Opción inválida, vuelve a intentar\n" + Colors.ANSI_RESET);
       return 0;
     }
   }
@@ -67,13 +66,13 @@ public class UserInput {
             userOption = false;
           }
         } else {
-          System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-          System.out.println("Debes ingresar una opción válida\n\n");
+          System.out.println(Colors.ANSI_RED
+              + "\n\t-> Opción inválida, vuelve a intentar. Recuerda que puedes ingresar s-Si-n-No y todas sus variantes\n"
+              + Colors.ANSI_RESET);
           isValidOption = false;
         }
       } catch (Exception e) {
-        System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-        System.out.println("Debes ingresar una opción correcta\n\n");
+        System.out.println(Colors.ANSI_RED + "\n\t-> Opción inválida, vuelve a intentar\n" + Colors.ANSI_RESET);
         isValidOption = false;
       }
 
@@ -100,11 +99,12 @@ public class UserInput {
         if (currentParam.matches(regexParam)) {
           return currentParam;
         } else {
-          System.out.println(Colors.ANSI_RED + "-> " + customErrorMessage + Colors.ANSI_RESET);
+          System.out.println(Colors.ANSI_RED + "\n-> " + customErrorMessage + Colors.ANSI_RESET);
           continue;
         }
       } catch (Exception e) {
-        System.out.println("\n\nProcura no cometer errores al ingresar los datos");
+        System.out
+            .println(Colors.ANSI_RED + "\n-> Procura no cometer errores al ingresar los datos" + Colors.ANSI_RESET);
       }
     } while (true);
   }
