@@ -1,5 +1,6 @@
 package FilesManagement;
 
+import utils.Colors;
 import utils.UserInput;
 
 public class InitialData {
@@ -9,14 +10,16 @@ public class InitialData {
      */
     public String setProjectName() {
         String projectName = "";
+        String regex = "[a-zA-Z0-9_]*";
         boolean isValidProjectName = false;
         do {
             System.out.println("\nIngrese el nombre del proyecto");
             projectName = System.console().readLine().trim();
-            if (projectName.length() > 0) {
+            if (projectName.length() > 0 && projectName.matches(regex)) {
                 isValidProjectName = true;
             } else {
-                System.out.println("\nEl nombre del proyecto no puede ser vacío");
+                System.out.println(
+                        "\nEl nombre del proyecto no puede ser vacío ni contener caracteres especiales además del \"_\"");
                 isValidProjectName = false;
             }
         } while (!isValidProjectName);
@@ -56,7 +59,7 @@ public class InitialData {
     public String setPackageName() {
         String packpageName = "";
         boolean isValidPackpageName = false;
-        String regexPackpageName = "^[a-zA-Z0-9]+\\.[[a-zA-Z0-9]+\\.]*[a-zA-Z0-9]{1}$";
+        String regexPackpageName = "^[a-zA-Z0-9_]+[\\.]{1}[[a-zA-Z0-9_]+[\\.]{1}]*[a-zA-Z0-9_]{1}$";
         do {
             System.out.println(
                     "\nIngrese el nombre del paquete siguiendo el formato (ec.edu.uta.fisei.software)(minimo debe tener dos carpetas): ");
@@ -101,20 +104,20 @@ public class InitialData {
         int option = 0;
         boolean isValidOption = false;
         do {
-            System.out.println("\nSeleccione una opción:\n");
+            System.out.println(Colors.ANSI_CYAN + "\nSeleccione una opción:\n" + Colors.ANSI_RESET);
             for (int i = 0; i < options.length; i++) {
-                System.out.println(options[i]);
+                System.out.println(Colors.ANSI_PURPLE + options[i] + Colors.ANSI_RESET);
             }
             try {
                 option = UserInput.getUserOption();
                 if (option > 0 && option <= options.length) {
                     isValidOption = true;
                 } else {
-                    System.out.println("\nLa opción seleccionada no es válida");
+                    System.out.println(Colors.ANSI_RED + "\nLa opción seleccionada no es válida" + Colors.ANSI_RESET);
                     isValidOption = false;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\nLa opción seleccionada no es válida");
+                System.out.println(Colors.ANSI_RED + "\nLa opción seleccionada no es válida" + Colors.ANSI_RESET);
                 isValidOption = false;
             }
         } while (!isValidOption);
@@ -130,20 +133,20 @@ public class InitialData {
         int option = 0;
         boolean isValidOption = false;
         do {
-            System.out.println("Seleccione una opción:\n");
+            System.out.println(Colors.ANSI_CYAN + "\nSeleccione una opción:\n" + Colors.ANSI_RESET);
             for (int i = 0; i < options.length; i++) {
-                System.out.println((i + 1) + ") " + options[i]);
+                System.out.println(Colors.ANSI_PURPLE + (i + 1) + ") " + options[i] + Colors.ANSI_RESET);
             }
             try {
                 option = UserInput.getUserOption();
                 if (option > 0 && option <= options.length) {
                     isValidOption = true;
                 } else {
-                    System.out.println("\nLa opción seleccionada no es válida");
+                    System.out.println(Colors.ANSI_RED + "\nLa opción seleccionada no es válida" + Colors.ANSI_RESET);
                     isValidOption = false;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\nLa opción seleccionada no es válida");
+                System.out.println(Colors.ANSI_RED + "\nLa opción seleccionada no es válida" + Colors.ANSI_RESET);
                 isValidOption = false;
             }
         } while (!isValidOption);

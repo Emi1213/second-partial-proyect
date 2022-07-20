@@ -1,0 +1,5 @@
+2022-07-20 01:38:32	Se utilizó la opción: Se creó la carpeta del proyecto
+2022-07-20 01:38:33	Se utilizó la opción: Se creó las carpetas del paquete
+2022-07-20 01:38:33	Se utilizó la opción: Creación del proyecto fdfd en ./
+2022-07-20 01:38:36	Se utilizó la opción: Inicio de gestión del proyecto fdfd en ./
+2022-07-20 01:38:41	Se utilizó la opción: 8. Crear una carpeta

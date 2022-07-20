@@ -1,5 +1,8 @@
 package FilesManagement;
 
+import java.io.File;
+
+import utils.Colors;
 import utils.UserInput;
 
 public class FilesManagement {
@@ -10,30 +13,64 @@ public class FilesManagement {
         String projectName = "";
         String projectPath = "";
         String packageName = "";
+        String welcome = "Bienvenido a la opción para crear proyectos y gestionar archivos y directorios";
         boolean answer = true;
         boolean runGestion = true;
         boolean runProjectAgain = true;
+        boolean isValidProject = true;
 
         Options options;
 
         do {
 
-            System.out.println("\nBienvenido a la opción para crear proyectos y gestionar archivos y directorios");
+            System.out.println(Colors.ANSI_BLUE + "\n -" + welcome.replaceAll("\\D", "-") + "-"
+                    + "\n| " + welcome.replaceAll("\\D", " ") + " |"
+                    + "\n| Bienvenido a la opción para crear proyectos y gestionar archivos y directorios |"
+                    + "\n| " + welcome.replaceAll("\\D", " ") + " |"
+                    + "\n -" + welcome.replaceAll("\\D", "-") + "-" + Colors.ANSI_RESET);
 
             System.out.println("\nVamos a empezar creando tu proyecto");
-            System.out.println("Estas de acuerdo? (si/no)");
+            System.out.println(Colors.ANSI_PURPLE + "Estas de acuerdo? (si/no)" + Colors.ANSI_RESET);
             answer = UserInput.getSNUserOption();
 
             if (answer) {
                 try {
-                    projectName = id.setProjectName();
-                    projectPath = id.setProjectPath();
+                    do {
+                        projectName = id.setProjectName();
+                        projectPath = id.setProjectPath();
+                        File preProject = new File(projectPath + "\\" + projectName);
+                        File testPath = new File(projectPath);
+                        if (testPath.exists()) {
+                            if (preProject.exists()) {
+                                System.out
+                                        .println(Colors.ANSI_RED + "El proyecto ya existe, ingrese un nombre diferente"
+                                                + Colors.ANSI_RESET);
+                                isValidProject = false;
+                            } else {
+                                isValidProject = true;
+                            }
+                        } else {
+                            System.out.println(Colors.ANSI_RED + "El directorio no existe, ingrese un directorio válido"
+                                    + Colors.ANSI_RESET);
+                            isValidProject = false;
+                        }
+                    } while (!isValidProject);
+
                     packageName = id.setPackageName();
                     fc = new FileCreation(projectName, projectPath, packageName);
                     fc.createProjectFolder();
-                    fc.createPackageFolder();
+                    System.out.println("\nQuieres crear los paquetes en forma escalonada o en el mismo directorio?");
+                    int option = InitialData.getNumeredOptionByArray(new String[] { "Escalonado", "Mismo directorio" });
+
+                    if (option == 1) {
+                        fc.createScalonatePackageFolder();
+                    } else {
+                        fc.createPackageFolder();
+                    }
+
                     fc.saveInLog("Creación del proyecto " + projectName + " en " + projectPath);
-                    System.out.println("\nQuieres empezar a gestionarlo? (si/no)");
+                    System.out.println(
+                            Colors.ANSI_PURPLE + "\nQuieres empezar a gestionarlo? (si/no)" + Colors.ANSI_RESET);
                     runGestion = UserInput.getSNUserOption();
 
                     if (runGestion) {
@@ -62,7 +99,18 @@ public class FilesManagement {
                 } else {
                     System.out.println("\nGracias por usar nuestra aplicación");
                     System.out.println("Saliendo de la aplicación...");
-                    System.out.println("Esperamos que vuelvas pronto\n\n");
+                    // hacer que el sistema espere 2 segundos
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("\nEsperamos que vuelvas pronto\n\n");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }

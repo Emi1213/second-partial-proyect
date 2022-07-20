@@ -1,0 +1,5 @@
+2022-07-20 01:26:53	Se utilizó la opción: Se creó la carpeta del proyecto
+2022-07-20 01:27:00	Se utilizó la opción: Se creó las carpetas del paquete
+2022-07-20 01:27:00	Se utilizó la opción: Creación del proyecto pepito en ./
+2022-07-20 01:27:03	Se utilizó la opción: Inicio de gestión del proyecto pepito en ./
+2022-07-20 01:27:10	Se utilizó la opción: 8. Crear una carpeta

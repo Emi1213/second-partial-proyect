@@ -74,6 +74,8 @@ public class UserInput {
         }
       } catch (Exception e) {
         System.out.println(Colors.ANSI_RED + "\n\t-> Opción inválida, vuelve a intentar\n" + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_RED + "\n\nProcura no cometer errores al ingresar la opción.");
+        System.out.println("Debes ingresar una opción válida.\n\n ->" + Colors.ANSI_RESET);
         isValidOption = false;
       }
 
