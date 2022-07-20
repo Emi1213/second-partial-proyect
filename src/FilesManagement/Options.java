@@ -1,6 +1,8 @@
 package FilesManagement;
 
 import java.io.File;
+import java.lang.reflect.Method;
+
 import utils.Colors;
 
 import utils.UserInput;
@@ -11,7 +13,8 @@ public class Options {
             "1. Mostrar los archivos y directorios contenidos en el directorio del proyecto",
             "2. Crear archivos", "3. Modificar el nombre de una carpeta o archivo",
             "4. Eliminar un archivo o directorio", "5. Leer un archivo y mostrarlo en pantalla",
-            "6. Escribir en un archivo", "7. Copiar un archivo", "8. Salir de las opciones de gestión\n" };
+            "6. Escribir en un archivo", "7. Copiar un archivo", "8. Crear una carpeta",
+            "9. Salir de las opciones de gestión\n" };
 
     public Options(FileCreation fileCreation) {
         this.fileCreation = fileCreation;
@@ -25,21 +28,14 @@ public class Options {
     public void showOptions() {
 
         int option = 0;
-
-        boolean isValidOption = true;
+        boolean runGestion = true;
         boolean runAgain = true;
 
         do {
-            System.out.println("\nSeleccione una opción:");
-            for (int i = 0; i < OPTIONS.length; i++) {
-                System.out.println(Colors.ANSI_PURPLE + OPTIONS[i] + Colors.ANSI_RESET);
-            }
-            option = Integer.parseInt(System.console().readLine());
-            if (option > 8 || option < 1) {
-                System.out.println("\nLa opción seleccionada no es válida");
-                isValidOption = false;
-            } else {
-                isValidOption = true;
+            option = InitialData.getOptionByArray(OPTIONS);
+            runGestion = getUserSure();
+
+            if (runGestion) {
 
                 switch (option) {
                     case 1:
@@ -51,7 +47,8 @@ public class Options {
 
                     case 2:
                         fileCreation.saveInLog(option, OPTIONS);
-
+                        System.out.println(Colors.ANSI_GREEN + "\nPara crear un archivo, ingrese el nombre del archivo:"
+                                + Colors.ANSI_RESET);
                         fileCreation.createFile(fileCreation.getProjectFolderPath());
                         runAgain = getUserRunAgain();
 
@@ -59,7 +56,9 @@ public class Options {
 
                     case 3:
                         fileCreation.saveInLog(option, OPTIONS);
-                        System.out.println("\nPara renombrar un archivo o directorio, primero ubique el direcorio:\n");
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara renombrar un archivo o directorio, primero ubique el direcorio:\n"
+                                + Colors.ANSI_RESET);
                         File whereRename = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
                         System.out.println("\nIngresa el archivo o directorio que deseas renombrar");
                         int optionFileToRename = InitialData
@@ -118,13 +117,22 @@ public class Options {
 
                     case 8:
                         fileCreation.saveInLog(option, OPTIONS);
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara crear una carpeta, primero ubique el directorio:\n" + Colors.ANSI_RESET);
+                        fileCreation.createFolder(fileCreation.getProjectFolderPath());
+                        runAgain = getUserRunAgain();
+
+                        break;
+
+                    case 9:
+                        fileCreation.saveInLog(option, OPTIONS);
                         runAgain = false;
 
                         break;
                 }
-
             }
-        } while (!isValidOption || runAgain);
+
+        } while (runAgain);
 
     }
 
@@ -137,10 +145,24 @@ public class Options {
         boolean runAgain = true;
         System.out.println(
                 Colors.ANSI_CYAN
-                        + "\n¿Desea ejecutar otra opción o ejecutar esta opción otra vez? (s/n)\n Al seleccionar s, se mostrarán nuevamente las opciones de gestión, al pulsar n, se finalizará la ejecución de las opciones de gestión y se mostrará la ventana inicial de creación de proyecto"
+                        + "\n¿Desea ejecutar otra opción o ejecutar esta opción otra vez? (s/n)\n (Al seleccionar s, se mostrarán nuevamente las opciones de gestión, al pulsar n, se finalizará la ejecución de las opciones de gestión y se mostrará la ventana inicial de creación de proyecto)\n ->"
                         + Colors.ANSI_RESET);
         runAgain = UserInput.getSNUserOption();
         return runAgain;
+    }
+
+    /**
+     * @description Ask the user if he be sure to run the option
+     * @return boolean with the answer
+     */
+    public boolean getUserSure() {
+        boolean sure = true;
+        System.out.println(
+                Colors.ANSI_CYAN
+                        + "\n¿Está seguro de que desea ejecutar esta opción? (s/n)\n ->"
+                        + Colors.ANSI_RESET);
+        sure = UserInput.getSNUserOption();
+        return sure;
     }
 
 }

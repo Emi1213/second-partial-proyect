@@ -6,10 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.Collator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javax.lang.model.util.ElementScanner6;
+import javax.swing.colorchooser.ColorSelectionModel;
+
+import utils.Colors;
 import utils.UserInput;
 
 public class FileCreation {
@@ -76,7 +81,8 @@ public class FileCreation {
             } else {
                 try {
                     projectFolder.mkdir();
-                    System.out.println("\nEl proyecto se ha creado correctamente");
+                    System.out.println(
+                            Colors.ANSI_CYAN + "\nEl proyecto se ha creado correctamente\n" + Colors.ANSI_RESET);
                     saveInLog("Se creó la carpeta del proyecto");
                     return true;
                 } catch (SecurityException e) {
@@ -109,6 +115,7 @@ public class FileCreation {
         boolean isCreated = true;
         File packageFolder = new File(getProjectFolderPath());
         ArrayList<String> ArraypackageName = new ArrayList<String>();
+        System.out.println("");
 
         try {
             if (packageName.contains(".")) {
@@ -123,7 +130,64 @@ public class FileCreation {
 
                     } else {
                         packageFolder.mkdir();
+                        System.out.println(
+                                Colors.ANSI_CYAN + "El paquete se ha creado correctamente" + Colors.ANSI_RESET);
+                        isCreated = true;
+                    }
+                }
+            } else {
+                packageFolder = new File(getProjectFolderPath() + "\\" + packageName);
+                if (packageFolder.exists()) {
+                    System.out.println("El paquete ya existe");
+                    isCreated = false;
+                } else {
+                    packageFolder.mkdir();
+                    System.out.println(Colors.ANSI_CYAN + "El paquete se ha creado correctamente" + Colors.ANSI_RESET);
+
+                    isCreated = true;
+                }
+            }
+
+            if (isCreated == false) {
+                return false;
+            } else {
+                saveInLog("Se creó las carpetas del paquete");
+                return true;
+
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    Colors.ANSI_RED + "Error en la creación de los paquetes" + e.getMessage() + Colors.ANSI_RESET);
+            return false;
+        }
+    }
+
+    /**
+     * @description Creates the package folders
+     * @return {boolean} True if the package folder was created successfully,
+     *         false otherwise
+     */
+
+    public boolean createPackageFolder() {
+        boolean isCreated = true;
+        File packageFolder;
+        ArrayList<String> ArraypackageName = new ArrayList<String>();
+        try {
+            if (packageName.contains(".")) {
+                for (int i = 0; i < packageName.split("\\.").length; i++) {
+                    ArraypackageName.add(packageName.split("\\.")[i]);
+                }
+
+                for (int i = 0; i < ArraypackageName.size(); i++) {
+                    packageFolder = new File(getProjectFolderPath() + "\\" + ArraypackageName.get(i));
+                    if (packageFolder.exists()) {
+                        System.out.println("El paquete ya existe");
+                        isCreated = false;
+
+                    } else {
+                        packageFolder.mkdir();
                         System.out.println("El paquete se ha creado correctamente");
+
                         isCreated = true;
                     }
                 }
@@ -176,7 +240,9 @@ public class FileCreation {
 
     public void showFiles(File file) {
         File[] files = file.listFiles();
-        System.out.println("Te encuentras en el directorio: " + file.getName());
+        System.out.println(Colors.ANSI_YELLOW +
+                "\nTe encuentras en el directorio: " + file.getPath() + ", contiene los archivos y carpetas:\n"
+                + Colors.ANSI_RESET);
         for (int i = 0; i < files.length; i++) {
             System.out.println(showFilesPropities(files[i]));
         }
@@ -191,7 +257,9 @@ public class FileCreation {
     public void showFiles(String path) {
         File filePath = new File(path);
         File[] files = filePath.listFiles();
-        System.out.println("Te encuentras en el directorio: " + filePath.getName());
+        System.out.println(Colors.ANSI_YELLOW +
+                "\nTe encuentras en el directorio: " + filePath.getPath() + ", contiene los archivos y carpetas:\n"
+                + Colors.ANSI_RESET);
         for (int i = 0; i < files.length; i++) {
             System.out.println(showFilesPropities(files[i]));
         }
@@ -206,7 +274,9 @@ public class FileCreation {
     public File[] getFiles(String path) {
         File filePath = new File(path);
         File[] files = filePath.listFiles();
-        System.out.println("Te encuentras en el directorio: " + filePath.getName());
+        System.out.println(Colors.ANSI_YELLOW +
+                "\nTe encuentras en el directorio: " + filePath.getPath() + ", contiene los archivos y carpetas:\n"
+                + Colors.ANSI_RESET);
         for (int i = 0; i < files.length; i++) {
             System.out.println(showFilesPropities(files[i]));
         }
@@ -223,7 +293,9 @@ public class FileCreation {
         ;
         File[] files = file.listFiles();
         System.out.println(
-                "\nTe encuentras en el directorio: " + file.getName() + "\n.\n Contiene los archivos y carpetas: \n");
+                Colors.ANSI_YELLOW +
+                        "\nTe encuentras en el directorio: " + file.getPath() + ", contiene los archivos y carpetas:\n"
+                        + Colors.ANSI_RESET);
         for (int i = 0; i < files.length; i++) {
             System.out.println((i + 1) + ". " + showFilesPropities(files[i]));
         }
@@ -241,7 +313,9 @@ public class FileCreation {
         ;
         File[] files = file.listFiles();
         String[] filesString = new String[files.length];
-        System.out.println("Te encuentras en el directorio: " + file.getName());
+        System.out.println(Colors.ANSI_YELLOW +
+                "\nTe encuentras en el directorio: " + file.getPath() + ", contiene los archivos y carpetas:\n"
+                + Colors.ANSI_RESET);
         for (int i = 0; i < files.length; i++) {
             filesString[i] = (" " + (i + 1) + ". " + showFilesPropities(files[i]));
         }
@@ -263,8 +337,9 @@ public class FileCreation {
             }
         }
         String[] filesString = new String[directories.size()];
-        System.out.println(
-                "\nTe encuentras en el directorio: " + file.getName() + "\n");
+        System.out.println(Colors.ANSI_YELLOW +
+                "\nTe encuentras en el directorio: " + file.getPath() + ", contiene las carpetas:\n"
+                + Colors.ANSI_RESET);
         for (int i = 0; i < directories.size(); i++) {
             filesString[i] = (" " + (i + 1) + ". " + showFilesPropities(directories.get(i)));
         }
@@ -286,7 +361,8 @@ public class FileCreation {
             }
         }
         String[] filesString = new String[directories.size()];
-        System.out.println("\nTe encuentras e n  el directorio: " + file.getName() + ", contiene las carpetas:\n");
+        System.out.println(Colors.ANSI_YELLOW + "\nTe encuentras en  el directorio: " + file.getPath()
+                + ", contiene las carpetas:\n" + Colors.ANSI_RESET);
         for (int i = 0; i < filesString.length; i++) {
             filesString[i] = (" " + (i + 1) + ". " + showFilesPropities(directories.get(i)));
             System.out.println(filesString[i]);
@@ -295,9 +371,27 @@ public class FileCreation {
     }
 
     /**
+     * @description Save in a File Array the list of the directories whit
+     *              description
+     * @param file
+     * @return File[] Array of directories
+     */
+    public File[] getDirectoriesOnly(File file) {
+        ArrayList<File> directories = new ArrayList<File>();
+        File[] files = file.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) {
+                directories.add(files[i]);
+            }
+        }
+
+        return directories.toArray(new File[directories.size()]);
+    }
+
+    /**
      * @description Create a file by asking the user the extension of the file and
      *              the name of the file after run the changeDirectory method
-     * @param file file where the file will be created
+     * @param projectPath String whit the path will run the changeDirectory method
      * @return {boolean} True if the file was created successfully, false otherwise
      */
     public boolean createFile(String projectPath) {
@@ -308,43 +402,67 @@ public class FileCreation {
         boolean isValidExtension = true;
         File file;
         boolean isCreated = true;
-        System.out.println("\n Para crear el archivo, escoja ubique el directorio:");
 
         do {
-            System.out.println("\nIngrese la extensión para el archivo que desea crear: \n\n"
-                    + "1. java\n"
-                    + "2. txt\n"
-                    + "3. xml\n"
-                    + "4. html\n"
-                    + "5. css\n"
-                    + "6. js\n"
-                    + "7. json\n"
-                    + "8. csv\n");
-            extenssion = Integer.parseInt(System.console().readLine());
-            if (extenssion > 8 || extenssion < 1) {
-                System.out.println("La extensión ingresada no es válida");
-                isValidExtension = false;
-            } else {
-                isValidExtension = true;
-                System.out.println("\nLa extensión ingresada es: " + EXTENSSIONS[extenssion - 1]);
-                System.out.println("\nIngrese el nombre del archivo:");
-                nameFile = InitialData.setParam();
-                file = new File(filePathToCreate + "\\" + nameFile + EXTENSSIONS[extenssion - 1]);
-                if (file.exists()) {
-                    System.out.println("El archivo ya existe");
-                    isCreated = false;
-                } else {
-                    try {
-                        file.createNewFile();
-                        isCreated = true;
-                    } catch (IOException e) {
-                        System.out.println("Error al crear el archivo");
-                        isCreated = false;
-                    }
-                }
+            System.out.println("\nIngrese la extensión para el archivo que desea crear: \n\n");
+            extenssion = InitialData.getNumeredOptionByArray(EXTENSSIONS);
 
+            System.out.println("\nLa extensión ingresada es: " + EXTENSSIONS[extenssion - 1]);
+            System.out.println("\nIngrese el nombre del archivo:");
+            nameFile = InitialData.setParam();
+            file = new File(filePathToCreate + "\\" + nameFile + EXTENSSIONS[extenssion - 1]);
+
+            if (file.exists()) {
+                System.out.println(Colors.ANSI_RED + "El archivo ya existe" + Colors.ANSI_RESET);
+                isCreated = false;
+            } else {
+                try {
+                    file.createNewFile();
+                    System.out.println(Colors.ANSI_GREEN + "\nEl archivo fue creado con éxito" + Colors.ANSI_RESET);
+                    isCreated = true;
+                } catch (IOException e) {
+                    System.out.println(Colors.ANSI_RED + "Error al crear el archivo" + Colors.ANSI_RESET);
+                    isCreated = false;
+                }
             }
+
         } while (!isValidExtension);
+
+        return isCreated;
+    }
+
+    /**
+     * @description Create a directory by asking the user the name of the directory
+     *              after run the changeDirectory method
+     * @param projectPath where the directory will run the changeDirectory method
+     * @return {boolean} True if the directory was created successfully, false
+     *         otherwise
+     */
+    public boolean createFolder(String projectPath) {
+        File filePath = new File(projectPath);
+        File filePathToCreate = changeDirectoryBasic(filePath);
+        String nameFolder = "";
+        File file;
+        boolean isCreated = true;
+
+        do {
+            System.out.println("\nIngrese el nombre de la carpeta que desea crear:");
+            nameFolder = InitialData.setParam();
+            file = new File(filePathToCreate + "\\" + nameFolder);
+            if (file.exists()) {
+                System.out.println(Colors.ANSI_RED + "La carpeta ya existe" + Colors.ANSI_RESET);
+                isCreated = false;
+            } else {
+                try {
+                    file.mkdir();
+                    System.out.println(Colors.ANSI_GREEN + "\nLa carpeta fue creada" + Colors.ANSI_RESET);
+                    isCreated = true;
+                } catch (SecurityException e) {
+                    System.out.println(Colors.ANSI_RED + "\nError al crear la carpeta" + Colors.ANSI_RESET);
+                    isCreated = false;
+                }
+            }
+        } while (!isCreated);
 
         return isCreated;
     }
@@ -379,10 +497,13 @@ public class FileCreation {
 
                     if (directoriesArray.length > 0) {
                         System.out.println(
-                                "\nDeseas cambiar de directorio? (s/n)\n En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.");
+                                Colors.ANSI_PURPLE
+                                        + "\nDeseas cambiar de directorio? (s/n)\n (En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.)"
+                                        + Colors.ANSI_RESET);
                         changeDirectory = UserInput.getSNUserOption();
                         if (changeDirectory) {
-                            System.out.println("\nIngrese el numero del directorio al que desea cambiar: ");
+                            System.out.println(Colors.ANSI_PURPLE
+                                    + "\nIngrese el numero del directorio al que desea cambiar: " + Colors.ANSI_RESET);
                             int option = InitialData.getOptionByArray(getFilesString(file));
                             filePath = directoriesArray[option - 1];
                             changeDirectoryFolders(filePath);
@@ -436,41 +557,50 @@ public class FileCreation {
                     File[] directoriesArray = getFiles(file);
 
                     if (directoriesArray.length > 0) {
-                        System.out.println(
-                                "\nDeseas cambiar de directorio? (s/n)\n En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.");
+                        System.out.println(Colors.ANSI_PURPLE +
+                                "\nDeseas cambiar de directorio? (s/n)\n En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual."
+                                + Colors.ANSI_RESET);
                         changeDirectory = UserInput.getSNUserOption();
                         if (changeDirectory) {
-                            System.out.println("\nIngrese el numero del directorio al que desea cambiar: ");
+                            System.out.println(Colors.ANSI_PURPLE
+                                    + "\nIngrese el numero del directorio al que desea cambiar: " + Colors.ANSI_RESET);
                             int option = InitialData.getOptionByArray(getFilesString(file));
                             filePath = directoriesArray[option - 1];
-                            changeDirectoryFolders(filePath);
-                            System.out.println("\n¿Quieres regresar al directorio anterior? (s/n)");
+                            filePath = changeDirectory(filePath);
+                            System.out.println(Colors.ANSI_PURPLE +
+                                    "\n¿Quieres regresar al directorio anterior? (s/n)\n(En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.)"
+                                    + Colors.ANSI_RESET);
                             backDirectory = UserInput.getSNUserOption();
 
                             if (backDirectory) {
-                                ;
                                 filePath = changeDirectory(file);
                                 continue;
 
                             } else {
                                 filePath = changeDirectory(filePath);
+                                System.out.println(
+                                        Colors.ANSI_YELLOW + "\nNo se ha cambiado de directorio" + Colors.ANSI_RESET);
+                                break;
                             }
 
                         } else {
-                            System.out.println("\nNo se ha cambiado de directorio");
+                            System.out.println(
+                                    Colors.ANSI_YELLOW + "\nNo se ha cambiado de directorio" + Colors.ANSI_RESET);
                             return filePath;
                         }
 
                     } else {
-                        System.out.println("\nEl directorio no contiene archivos");
+                        System.out.println(
+                                Colors.ANSI_YELLOW + "\nEl directorio no contiene archivos" + Colors.ANSI_RESET);
                         return filePath;
                     }
                 } else {
-                    System.out.println("\nEl archivo no es un directorio");
+                    System.out.println(
+                            Colors.ANSI_YELLOW + "\nEl archivo no es una carpeta o directorio" + Colors.ANSI_RESET);
                     return filePath;
                 }
             } else {
-                System.out.println("\nEl directorio no existe");
+                System.out.println(Colors.ANSI_RED + "\nEl directorio no existe" + Colors.ANSI_RESET);
                 return filePath;
             }
         } while (!changeDirectory);
@@ -496,44 +626,146 @@ public class FileCreation {
 
                     if (directoriesArray.length > 0) {
                         System.out.println(
-                                "\nDeseas cambiar de directorio? (s/n)\n En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.");
+                                Colors.ANSI_PURPLE
+                                        + "\nDeseas cambiar de directorio? (s/n)\n En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual."
+                                        + Colors.ANSI_RESET);
                         changeDirectory = UserInput.getSNUserOption();
+
                         if (changeDirectory) {
-                            System.out.println("\nIngrese el numero del directorio al que desea cambiar: ");
+                            System.out.println(Colors.ANSI_PURPLE
+                                    + "\nIngrese el numero del directorio al que desea cambiar: " + Colors.ANSI_RESET);
                             int option = InitialData.getOptionByArray(getDirectoriesString(file));
                             filePath = directoriesArray[option - 1];
-                            changeDirectoryFolders(filePath);
-                            System.out.println("\n¿Quieres regresar al directorio anterior? (s/n)");
+                            filePath = changeDirectoryFolders(filePath);
+                            System.out.println(
+                                    Colors.ANSI_PURPLE
+                                            + "\n¿Quieres regresar al directorio anterior? (s/n)\n(En caso de que estés seleccionando un directorio, al pulsar n, el directorio seleccionado será el directorio actual.)"
+                                            + Colors.ANSI_RESET);
                             backDirectory = UserInput.getSNUserOption();
 
                             if (backDirectory) {
-                                ;
                                 filePath = changeDirectoryFolders(file);
                                 continue;
 
                             } else {
                                 filePath = changeDirectoryFolders(filePath);
+                                System.out.println(
+                                        Colors.ANSI_YELLOW + "\nNo se ha cambiado de directorio" + Colors.ANSI_RESET);
+                                break;
                             }
-
                         } else {
-                            System.out.println("\nNo se ha cambiado de directorio");
+                            System.out.println(
+                                    Colors.ANSI_YELLOW + "\nNo se ha cambiado de directorio" + Colors.ANSI_RESET);
                             return filePath;
                         }
 
                     } else {
-                        System.out.println("\nEl directorio no contiene carpetas");
+                        System.out.println(
+                                Colors.ANSI_YELLOW + "\nEl directorio no contiene carpetas" + Colors.ANSI_RESET);
                         return filePath;
                     }
                 } else {
-                    System.out.println("\nEl archivo no es un directorio");
+                    System.out.println(Colors.ANSI_YELLOW + "\nEl archivo no es un directorio" + Colors.ANSI_RESET);
                     return filePath;
                 }
             } else {
-                System.out.println("\nEl directorio no existe");
+                System.out.println(Colors.ANSI_RED + "\nEl directorio no existe" + Colors.ANSI_RESET);
                 return filePath;
             }
         } while (!changeDirectory);
         return filePath;
+    }
+
+    /**
+     * @description Changwe directory method in basic mode
+     * @param file
+     * @return
+     */
+    public File changeDirectoryBasic(File file) {
+        File filePath = file;
+        ArrayList<File> directoriesHistory = new ArrayList<>();
+        File[] directoriesArray;
+        String[] changeOrBack = { "Cambiar de directorio", "Regresar al directorio principal",
+                "Seleccionar este directorio" };
+        String[] changeOrSelec = { "Cambiar de directorio", "Seleccionar este directorio" };
+        int option = 0;
+        int fileOption = 0;
+        int directoryOption = 0;
+
+        if (file.exists()) {
+
+            if (file.isDirectory()) {
+                directoriesArray = getDirectories(file);
+
+                if (directoriesArray.length > 0) {
+                    option = InitialData.getNumeredOptionByArray(changeOrSelec);
+
+                    switch (option) {
+                        case 1:
+                            if (directoriesArray.length > 0) {
+
+                                System.out.println(Colors.ANSI_PURPLE
+                                        + "\nIngrese el número del directorio al que desea cambiar: "
+                                        + Colors.ANSI_RESET);
+                                fileOption = InitialData.getNumeredOptionByArray(getDirectoriesString(file));
+                                filePath = directoriesArray[fileOption - 1];
+                                directoriesHistory.add(filePath);
+                                getDirectories(filePath);
+                                directoryOption = InitialData.getNumeredOptionByArray(changeOrBack);
+
+                                do {
+                                    System.out.println(Colors.ANSI_PURPLE
+                                            + "\nIngrese el número del directorio al que desea cambiar: "
+                                            + Colors.ANSI_RESET);
+                                    fileOption = InitialData.getOptionByArray(getDirectoriesString(filePath));
+
+                                    switch (directoryOption) {
+                                        case 1:
+
+                                            directoriesArray = getDirectoriesOnly(filePath);
+                                            filePath = directoriesArray[fileOption - 1];
+                                            directoriesHistory.add(filePath);
+                                            break;
+                                        case 2:
+                                            directoriesHistory.remove(directoriesHistory.size() - 1);
+                                            filePath = directoriesHistory.get(directoriesHistory.size() - 1);
+                                            System.out.println(Colors.ANSI_YELLOW
+                                                    + "\nSe ha regresado al directorio principal" + Colors.ANSI_RESET);
+                                            break;
+                                        case 3:
+                                            filePath = file;
+                                            System.out.println(Colors.ANSI_YELLOW
+                                                    + "\nSe ha seleccionado este directorio" + Colors.ANSI_RESET);
+                                            break;
+
+                                    }
+                                    filePath = directoriesHistory.get(directoriesHistory.size() - 1);
+                                } while (filePath != file);
+                            }
+
+                        case 2:
+                            System.out.println(Colors.ANSI_YELLOW
+                                    + "\nSe ha seleccionado este directorio" + Colors.ANSI_RESET);
+                            return file;
+
+                    }
+
+                } else {
+                    System.out.println(
+                            Colors.ANSI_YELLOW + "\nEl directorio no contiene carpetas" + Colors.ANSI_RESET);
+                    return filePath;
+                }
+
+            } else {
+                System.out.println(Colors.ANSI_YELLOW + "\nEl archivo no es un directorio" + Colors.ANSI_RESET);
+                return filePath;
+            }
+        } else {
+            System.out.println(Colors.ANSI_RED + "\nEl directorio no existe" + Colors.ANSI_RESET);
+            return filePath;
+        }
+        return filePath;
+
     }
 
     /**
@@ -679,26 +911,31 @@ public class FileCreation {
         try {
             if (file.isFile()) {
                 System.out.println(
-                        "¿Qué forma de escritura desea probar?\n1. Sobreescribir el archivo.\n2. Escribir al final del archivo.");
-                int option = InitialData.getOptionByArray(new String[] { "1", "2" });
+                        "¿Qué forma de escritura desea probar?\n");
+                int option = InitialData.getOptionByArray(
+                        new String[] { "1. Sobreescribir el archivo.", "2. Escribir al final del archivo." });
 
                 if (option == 1) {
                     FileWriter fw = new FileWriter(file);
                     do {
                         try {
-                            System.out.println("Ingrese el contenido del archivo (Se sobreescribirá): ");
+                            System.out.println(Colors.ANSI_YELLOW
+                                    + "Ingrese el contenido del archivo (Se sobreescribirá): " + Colors.ANSI_RESET);
                             String content = System.console().readLine();
                             fw.write(content);
                             fw.flush();
                             isWritten = true;
-                            System.out.println("Deseas escribir otra linea? (s/n)");
+                            System.out.println(
+                                    Colors.ANSI_PURPLE + "Deseas escribir otra linea? (s/n)" + Colors.ANSI_RESET);
                             confirm = UserInput.getSNUserOption();
                         } catch (Exception e) {
-                            System.out.println("Error al escribir el archivo" + e.getMessage());
+                            System.out.println(Colors.ANSI_RED + "Error al escribir el archivo" + e.getMessage()
+                                    + Colors.ANSI_RESET);
                             isWritten = false;
                         }
                     } while (confirm);
                     fw.close();
+                    System.out.println(Colors.ANSI_GREEN + "Archivo escrito con éxito" + Colors.ANSI_RESET);
                 } else {
 
                     FileWriter fw = new FileWriter(file, true);
@@ -717,6 +954,7 @@ public class FileCreation {
                         }
                     } while (confirm);
                     fw.close();
+                    System.out.println(Colors.ANSI_GREEN + "Archivo escrito con éxito" + Colors.ANSI_RESET);
                 }
 
             } else {

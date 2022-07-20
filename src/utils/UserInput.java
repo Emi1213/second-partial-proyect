@@ -67,13 +67,13 @@ public class UserInput {
             userOption = false;
           }
         } else {
-          System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-          System.out.println("Debes ingresar una opción válida\n\n");
+          System.out.println(Colors.ANSI_RED + "\n\nProcura no cometer errores al ingresar la opción.");
+          System.out.println("Debes ingresar una opción válida.\n\n ->" + Colors.ANSI_RESET);
           isValidOption = false;
         }
       } catch (Exception e) {
-        System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-        System.out.println("Debes ingresar una opción correcta\n\n");
+        System.out.println(Colors.ANSI_RED + "\n\nProcura no cometer errores al ingresar la opción.");
+        System.out.println("Debes ingresar una opción correcta\n\n ->" + Colors.ANSI_RESET);
         isValidOption = false;
       }
 
