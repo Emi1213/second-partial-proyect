@@ -108,9 +108,18 @@ public class EmployeesManager {
     String employeeLastName = UserInput.getUserParam("Ingresa el apellido", "^[A-Z]{1}[a-z|áéíóú]{1,15}$",
         "Procura ingresa un apellido válido. Ejemplo: Pérez");
 
-    int employeeAge = Integer
-        .parseInt(
-            UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida. Ejemplo: 20"));
+    int employeeAge;
+
+    do {
+      employeeAge = Integer
+          .parseInt(
+              UserInput.getUserParam("Ingresa la edad", "[0-9]{2}", "Procura ingresa una edad válida. Ejemplo: 20"));
+
+      if (employeeAge < 18) {
+        System.out.println(Colors.ANSI_RED + "\n-> La edad debe ser mayor a 18 años\n" + Colors.ANSI_RESET);
+      } else
+        break;
+    } while (true);
 
     int employeeYearsOfExperience;
 
