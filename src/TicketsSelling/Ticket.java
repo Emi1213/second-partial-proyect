@@ -35,6 +35,7 @@ public class Ticket {
       destinos.showDestinos();
       ArrayList<Destino> totalDestinies = destinos.getDestinies();
       descounts.getSecondDescount(credentials.getDestinationsQuantity());
+      descounts.getDescounts(credentials.getDescountClients());
 
       for (Destino destino : totalDestinies) {
         System.out.println(destino.getCityName() + " " + destino.getCityCode() + " " + destino.getNumberSeats() + " "

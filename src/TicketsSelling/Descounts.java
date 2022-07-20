@@ -36,8 +36,8 @@ public class Descounts {
       pricetotality += prices;
       descountscity += descountscity;
       return descountscity;
-
     }
+  }
 
   public double getSecondDescount(int destinationsQuantity) {
     
@@ -54,6 +54,7 @@ public class Descounts {
       }
     }
       return seconddescount;
+    }
 
   public double getDescounts(boolean descount1) {
     if (descount1 == true) {

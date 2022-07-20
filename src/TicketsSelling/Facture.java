@@ -3,10 +3,15 @@ package TicketsSelling;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Facture {
+  ArrayList<Destino> arrayDescounts;
 
   Credentials credentials = new Credentials();
+  Descounts descounts = new Descounts();
+  boolean descount1 = credentials.getDescountClients();
+  int destinationsQuantity = credentials.getDestinationsQuantity();
 
   String[] Credencials;
   String name;
@@ -71,8 +76,25 @@ public class Facture {
     System.out.println("*     ID: " + ID);
     System.out.println("*     Edad: " + age);
     System.out.println("*     Correo electrónico:" + email);
-    System.out.println("*     Telefono: " + phone + "\n");
-    System.out.println("*********************************************************");
+    System.out.println("*     Telefono: " + phone + "\n\n");
+    System.out.println("*********************************************************\n");
+    System.out.println("*    Boletos:                                       *\n");
+    System.out.println("*********************************************************\n");
+    for (int i = 0; i < arrayDescounts.size(); i++) {
+      System.out.println(arrayDescounts.get(i).toString());
+    }
+
+    System.out.println("*                            Subtotal 1: $" + descounts.getSubtotaltDescount() + "\n");
+
+    System.out.println("*                            Valor descuento 1:: $" + descounts.getFisrtDescount() + "\n");
+    System.out.println(
+        "*                            Valor descuento 2: $" + descounts.getSecondDescount(destinationsQuantity) + "\n");
+
+    System.out.println("*                            Descuentos Totales: " + descounts.getDescountTotal() + "\n");
+    System.out.println("*                            IVA: $" + descounts.getIVAPrice() + "\n");
+
+    System.out.println("*                            Total: $" + descounts.getDescounts(descount1) + "\n");
+
   }
 
   /**
@@ -104,7 +126,23 @@ public class Facture {
     writer.write("*     Edad: " + age + "\n");
     writer.write("*     Correo electrónico:" + email + "\n");
     writer.write("*     Telefono: " + phone + "\n");
-    writer.write("*********************************************************");
+    writer.write("*********************************************************\n");
+    writer.write("*    Boletos:                                       *\n");
+    writer.write("*********************************************************\n");
+    for (int i = 0; i < arrayDescounts.size(); i++) {
+      writer.write(arrayDescounts.get(i).toString());
+    }
+
+    writer.write("*                            Subtotal 1: $" + descounts.getSubtotaltDescount() + "\n");
+
+    writer.write("*                            Valor descuento 1:: $" + descounts.getFisrtDescount() + "\n");
+    writer.write(
+        "*                            Valor descuento 2: $" + descounts.getSecondDescount(destinationsQuantity) + "\n");
+
+    writer.write("*                            Descuentos Totales: " + descounts.getDescountTotal() + "\n");
+    writer.write("*                            IVA: $" + descounts.getIVAPrice() + "\n");
+
+    writer.write("*                            Total: $" + descounts.getDescounts(descount1) + "\n");
     writer.close();
   }
 }
