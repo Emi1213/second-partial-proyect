@@ -20,8 +20,10 @@ public class MenuType {
         System.out.println("\t1. Añadir un nuevo empleado");
         System.out.println("\t2. Eliminar un empleado");
         System.out.println("\t3. Modificar la información de un empleado");
-        System.out.println("\t4. Generar reporte de empleados en formato CSV");
-        System.out.println("\t5. Salir");
+        System.out.println("\t4. Ver la lista de empleados");
+        System.out.println("\t5. Ver la información de un empleado arbitrario");
+        System.out.println("\t6. Generar reporte de empleados en formato CSV");
+        System.out.println("\t7. Salir");
         break;
 
       case "modifyEmployee":

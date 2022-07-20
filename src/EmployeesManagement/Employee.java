@@ -13,7 +13,7 @@ public class Employee {
   private int employeeAge;
 
   /**
-   * Constructor of the class
+   * Constructor of the class, when the employee is created by the manager.
    * 
    * @param employeeName
    * @param lastEmployeeName
@@ -37,6 +37,20 @@ public class Employee {
     this.UID = generateUID();
   }
 
+  /**
+   * Constructor of the class, when the employee is created by a file.
+   * 
+   * @param employeeName
+   * @param lastEmployeeName
+   * @param employeeAge
+   * @param yearsOfExperience
+   * @param UID
+   * @param employeeEmail
+   * @param employeePhone
+   * @param employeeAddress
+   * @param employeeLevel
+   * @param employeeDNI
+   */
   public Employee(String employeeName, String lastEmployeeName, String employeeAge, String yearsOfExperience,
       String UID, String employeeEmail, String employeePhone, String employeeAddress, String employeeLevel,
       String employeeDNI) {

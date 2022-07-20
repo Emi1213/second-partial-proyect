@@ -12,11 +12,12 @@ public class EmployeesManager {
     EmployeeFileManager.fillEmployees();
 
     int option;
+    boolean redoOption = true;
 
     do {
       System.out.println("\nElige una de estas opciones:\n");
       MenuType.showMenu("employees");
-      option = UserInput.getUserOption(scan, new int[] { 1, 5 });
+      option = UserInput.getUserOption(scan, new int[] { 1, 7 });
 
       switch (option) {
         case 1:
@@ -63,19 +64,43 @@ public class EmployeesManager {
           break;
 
         case 4:
-          EmployeeFileManager.generateReportInCSV();
+          EmployeeFileManager.printEmployees();
           break;
 
         case 5:
-          System.out.println("\nEs un gusto tenerte en nuestra aplicación, hasta pronto!\n");
+          System.out.println("\n\n");
+          String uid3 = UserInput.getUserParam("Ingrese el UID del empleado que desea ver su información",
+              "^[0-9]{3}-[A-Z]{3}",
+              "Procura ingresar un UID válido en el formato: 111-AAA");
+
+          EmployeeFileManager.showArbitraryEmployee(uid3);
+          break;
+
+        case 6:
+          EmployeeFileManager.generateReportInCSV();
+          break;
+
+        case 7:
+          System.out.println("\n¿Quiéres volver a intentar esta opción? (Si/No)\n");
+          boolean answer = UserInput.getSNUserOption();
+
+          if (!answer) {
+            redoOption = false;
+            System.out.println(Colors.ANSI_CYAN + "\n\n¡Hasta pronto! Opción realizada con <3 por Lenin\n\n"
+                + Colors.ANSI_RESET);
+          }
           break;
       }
-
-    } while (option != 5);
+    } while (redoOption);
   }
 
+  /**
+   * Gets the information of the employee to add
+   * 
+   * @return Employee - the employee to add
+   */
   public static Employee getEmployeeInfo() {
-    System.out.println(Colors.ANSI_GREEN + "\nIngresa los siguientes datos del empleado\n" + Colors.ANSI_RESET);
+    System.out.println(Colors.ANSI_CYAN + "\nIngresa los siguientes datos del empleado\n" + Colors.ANSI_RESET);
 
     String employeeName = UserInput.getUserParam("Ingresa el nombre", "^[A-Z]{1}[a-z|áéíóú]{1,15}",
         "Procura ingresa un nombre válido. Ejemplo: Juan");

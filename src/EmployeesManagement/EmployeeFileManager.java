@@ -1,11 +1,14 @@
 package EmployeesManagement;
 
 import java.util.ArrayList;
-
 import utils.UserInput;
 import java.io.*;
 import utils.*;
 
+/**
+ * @author Lenin Mazabanda
+ * @version 1.0
+ */
 public class EmployeeFileManager {
   public static final String FILE_NAME = "employees.txt";
   public static final File FILE = new File(FILE_NAME);
@@ -15,6 +18,11 @@ public class EmployeeFileManager {
   public static BufferedReader br;
   public static ArrayList<Employee> employees = new ArrayList<Employee>();
 
+  /**
+   * @description Initializes the arraylist of employees with the employees from
+   *              the file
+   * @return boolean True if the file was loaded correctly, false otherwise
+   */
   public static boolean fillEmployees() {
     if (FILE.exists()) {
       try {
@@ -47,16 +55,34 @@ public class EmployeeFileManager {
     return false;
   }
 
+  /**
+   * @description Print all the employees in the arraylist on the screen
+   */
+  public static void printEmployees() {
+    for (Employee employee : employees) {
+      System.out.println("\n" + Colors.ANSI_CYAN + employee.toString() + Colors.ANSI_RESET + "\n");
+    }
+  }
+
+  /**
+   * @description Adds a new employee to the arraylist of employees
+   * @param employee Employee to be added to the arraylist
+   */
   public static void addEmployee(Employee employee) {
     employees.add(employee);
     System.out.println(Colors.ANSI_GREEN + "\n-> Empleado agregado correctamente\n" + Colors.ANSI_RESET);
   }
 
+  /**
+   * @description Deletes an employee from the arraylist of employees with an UID
+   * @param UID UID of the employee to be deleted
+   * @return boolean True if the employee was deleted, false otherwise
+   */
   public static boolean deleteEmployee(String UID) {
     for (Employee employee : employees) {
       if (employee.getUID().equals(UID)) {
         employees.remove(employee);
-        System.out.println("Empleado eliminado correctamente");
+        System.out.println(Colors.ANSI_GREEN + "\n-> Empleado eliminado correctamente\n" + Colors.ANSI_RESET);
         return true;
       }
     }
@@ -67,6 +93,11 @@ public class EmployeeFileManager {
     return false;
   }
 
+  /**
+   * @description Updates an employee from the arraylist of employees with an UID
+   * @param UID           UID of the employee to be updated
+   * @param paramToModify Parameter to be modified
+   */
   public static void modifyEmployee(String UID, int paramToModify) {
     for (Employee employee : employees) {
       if (employee.getUID().equals(UID)) {
@@ -110,6 +141,9 @@ public class EmployeeFileManager {
     showArbitraryEmployee(UID);
   }
 
+  /**
+   * @description Generates a file with the employees in the arraylist
+   */
   public static void generateReportInCSV() {
     if (employees.size() == 0) {
       System.out.println(Colors.ANSI_RED + "\n-> No hay empleados para generar el reporte\n"
@@ -136,10 +170,14 @@ public class EmployeeFileManager {
     }
   }
 
+  /**
+   * @description Shows an employee from the arraylist of employees with an UID
+   * @param UID UID of the employee to be shown
+   */
   public static void showArbitraryEmployee(String UID) {
     for (Employee employee : employees) {
       if (employee.getUID().equals(UID)) {
-        System.out.println(employee.toString());
+        System.out.println("\n" + Colors.ANSI_CYAN + employee.toString() + Colors.ANSI_RESET + "\n");
         return;
       }
     }

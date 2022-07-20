@@ -99,7 +99,7 @@ public class UserInput {
         if (currentParam.matches(regexParam)) {
           return currentParam;
         } else {
-          System.out.println(Colors.ANSI_RED + "\n-> " + customErrorMessage + Colors.ANSI_RESET);
+          System.out.println(Colors.ANSI_RED + "\n-> " + customErrorMessage + "\n" + Colors.ANSI_RESET);
           continue;
         }
       } catch (Exception e) {
