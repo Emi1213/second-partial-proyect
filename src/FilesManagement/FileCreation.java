@@ -6,13 +6,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.Collator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javax.lang.model.util.ElementScanner6;
-import javax.swing.colorchooser.ColorSelectionModel;
 
 import utils.Colors;
 import utils.UserInput;
