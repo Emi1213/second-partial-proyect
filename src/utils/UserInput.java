@@ -35,10 +35,10 @@ public class UserInput {
    */
   public static int getUserOption() {
     try {
+      System.out.print("\t-> ");
       return Integer.valueOf(System.console().readLine().trim().replaceAll("\\D*", ""));
     } catch (Exception e) {
-      System.out.println("\n\nProcura no cometer errores al ingresar la opción.");
-      System.out.println("Debes ingresar un número de opción correcto\n\n");
+      System.out.println(Colors.ANSI_RED + "\n\t-> Opción inválida, vuelve a intentar\n" + Colors.ANSI_RESET);
       return 0;
     }
   }
