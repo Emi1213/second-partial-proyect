@@ -39,13 +39,20 @@ public class FilesManagement {
                         projectName = id.setProjectName();
                         projectPath = id.setProjectPath();
                         File preProject = new File(projectPath + "\\" + projectName);
-                        if (preProject.exists()) {
-                            System.out.println(
-                                    Colors.ANSI_RED + "\nEl proyecto ya existe, ingrese otro nombre o otro path:"
-                                            + Colors.ANSI_RESET);
-                            isValidProject = false;
+                        File testPath = new File(projectPath);
+                        if (testPath.exists()) {
+                            if (preProject.exists()) {
+                                System.out
+                                        .println(Colors.ANSI_RED + "El proyecto ya existe, ingrese un nombre diferente"
+                                                + Colors.ANSI_RESET);
+                                isValidProject = false;
+                            } else {
+                                isValidProject = true;
+                            }
                         } else {
-                            isValidProject = true;
+                            System.out.println(Colors.ANSI_RED + "El directorio no existe, ingrese un directorio válido"
+                                    + Colors.ANSI_RESET);
+                            isValidProject = false;
                         }
                     } while (!isValidProject);
 

@@ -40,14 +40,15 @@ public class Options {
                 switch (option) {
                     case 1:
                         fileCreation.saveInLog(option, OPTIONS);
-                        fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
+                        fileCreation.moveOnDirectories(fileCreation.getProjectFolderPath());
                         runAgain = getUserRunAgain();
 
                         break;
 
                     case 2:
                         fileCreation.saveInLog(option, OPTIONS);
-                        System.out.println(Colors.ANSI_GREEN + "\nPara crear un archivo, ingrese el nombre del archivo:"
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara crear un archivo, primero ubique el directorio donde crearlo:"
                                 + Colors.ANSI_RESET);
                         fileCreation.createFile(fileCreation.getProjectFolderPath());
                         runAgain = getUserRunAgain();
@@ -57,60 +58,55 @@ public class Options {
                     case 3:
                         fileCreation.saveInLog(option, OPTIONS);
                         System.out.println(Colors.ANSI_GREEN
-                                + "\nPara renombrar un archivo o directorio, primero ubique el direcorio:\n"
+                                + "\nPara renombrar un archivo o directorio, primero ubique el archivo a ser renombrado:\n"
                                 + Colors.ANSI_RESET);
                         File whereRename = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
-                        System.out.println("\nIngresa el archivo o directorio que deseas renombrar");
-                        int optionFileToRename = InitialData
-                                .getOptionByArray(fileCreation.getFilesString(whereRename));
-                        File fileToRename = whereRename.listFiles()[optionFileToRename - 1];
-                        fileCreation.renameFile(fileToRename);
+                        ;
+                        fileCreation.renameFile(whereRename);
                         runAgain = getUserRunAgain();
 
                         break;
 
                     case 4:
                         fileCreation.saveInLog(option, OPTIONS);
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara eliminar un archivo o directorio, primero ubique el archivo o directorio a ser eliminado:\n"
+                                + Colors.ANSI_RESET);
                         File whereDelete = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
-                        System.out.println("\nIngresa el archivo o directorio que deseas eliminar");
-                        int optionFileToDelete = InitialData
-                                .getOptionByArray(fileCreation.getFilesString(whereDelete));
-                        File fileToDelete = whereDelete.listFiles()[optionFileToDelete - 1];
-                        fileCreation.deleteFile(fileToDelete);
+                        fileCreation.deleteFile(whereDelete);
                         runAgain = getUserRunAgain();
 
                         break;
 
                     case 5:
                         fileCreation.saveInLog(option, OPTIONS);
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara leer un archivo, primero ubique el archivo a ser leido:\n"
+                                + Colors.ANSI_RESET);
                         File whereRead = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
-                        System.out.println("\nIngresa el archivo que deseas leer");
-                        int optionFileToRead = InitialData.getOptionByArray(fileCreation.getFilesString(whereRead));
-                        File fileToRead = whereRead.listFiles()[optionFileToRead - 1];
-                        fileCreation.readFile(fileToRead);
+                        fileCreation.readFile(whereRead);
                         runAgain = getUserRunAgain();
 
                         break;
 
                     case 6:
                         fileCreation.saveInLog(option, OPTIONS);
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara escribir en un archivo, primero ubique el archivo a ser escrito:\n"
+                                + Colors.ANSI_RESET);
                         File whereWrite = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
-                        System.out.println("\nIngresa el archivo que deseas escribir");
-                        int optionFileToWrite = InitialData
-                                .getOptionByArray(fileCreation.getFilesString(whereWrite));
-                        File fileToWrite = whereWrite.listFiles()[optionFileToWrite - 1];
-                        fileCreation.writeFile(fileToWrite);
+                        fileCreation.writeFile(whereWrite);
                         runAgain = getUserRunAgain();
 
                         break;
 
                     case 7:
                         fileCreation.saveInLog(option, OPTIONS);
+                        System.out.println(Colors.ANSI_GREEN
+                                + "\nPara copiar un archivo, primero ubique el archivo a ser copiado:\n"
+                                + Colors.ANSI_RESET);
                         File whereCopy = fileCreation.changeDirectory(fileCreation.getProjectFolderPath());
-                        System.out.println("\nIngresa el archivo que deseas copiar");
-                        int optionFileToCopy = InitialData.getOptionByArray(fileCreation.getFilesString(whereCopy));
-                        File fileToCopy = whereCopy.listFiles()[optionFileToCopy - 1];
-                        fileCreation.copyFile(fileToCopy);
+                        fileCreation.copyFile(whereCopy);
                         runAgain = getUserRunAgain();
 
                         break;
