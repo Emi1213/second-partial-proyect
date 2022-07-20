@@ -31,4 +31,8 @@ public class Destino {
   public int getPrice() {
     return price;
   }
+
+  public String toString() {
+    return "Destino: " + cityName + " - " + cityCode + " - " + numberSeats + " - " + price + " - " + dateToTravel;
+  }
 }

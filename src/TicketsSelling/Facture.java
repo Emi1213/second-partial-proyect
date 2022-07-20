@@ -6,13 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Facture {
-  ArrayList<Destino> arrayDescounts = new ArrayList<>();
-
-  Credentials credentials = new Credentials();
-  Descounts descounts = new Descounts();
-  boolean descount1 = credentials.getDescountClients();
-  int destinationsQuantity = credentials.getDestinationsQuantity();
-
+  ArrayList<Destino> arrayDescounts;
+  boolean descount1;
+  int destinationsQuantity;
+  Descounts descounts;
   String[] Credencials;
   String name;
   String lastName;
@@ -31,25 +28,17 @@ public class Facture {
    * @param phone
    * @param email
    */
-  public Facture(String name, String lastName, String ID, String age, String phone, String email) {
+  public Facture(String name, String lastName, String ID, String age, String phone, String email, boolean descount1,
+      ArrayList<Destino> arrayDescounts) {
     this.name = name;
     this.lastName = lastName;
     this.ID = ID;
     this.age = age;
     this.phone = phone;
     this.email = email;
-  }
-
-  public void getCredentials() {
-    credentials.getCredentials();
-    Credencials = credentials.getArrayCredentials();
-    name = Credencials[0];
-    lastName = Credencials[1];
-    ID = Credencials[2];
-    age = Credencials[3];
-    phone = Credencials[4];
-    email = Credencials[5];
-
+    this.descount1 = descount1;
+    this.descounts = new Descounts(arrayDescounts);
+    this.arrayDescounts = arrayDescounts;
   }
 
   /**
@@ -80,6 +69,7 @@ public class Facture {
     System.out.println("*********************************************************\n");
     System.out.println("*    Boletos:                                       *\n");
     System.out.println("*********************************************************\n");
+
     for (int i = 0; i < arrayDescounts.size(); i++) {
       System.out.println(arrayDescounts.get(i).toString());
     }

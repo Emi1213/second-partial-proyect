@@ -3,7 +3,7 @@ package TicketsSelling;
 import java.util.ArrayList;
 
 public class Descounts {
-  ArrayList<Destino> arrayDescounts = new ArrayList<>();
+  ArrayList<Destino> arrayDescounts;
   String[] citycodes = { "17", "13", "09", "07" };
   double prices;
   double descountscity = 0;
@@ -16,20 +16,23 @@ public class Descounts {
   double impuestoPrice;
   double subtotalwithD;
 
-  public double getSubtotaltDescount() {
+  public Descounts(ArrayList<Destino> arrayDescounts) {
+    this.arrayDescounts = arrayDescounts;
+  }
 
+  public double getSubtotaltDescount() {
     for (int i = 0; i < arrayDescounts.size(); i++) {
-      if (arrayDescounts.get(i).getCityCode() == "17") {
+      if (arrayDescounts.get(i).getCityCode().equals("17")) {
         prices = arrayDescounts.get(i).getPrice() - (arrayDescounts.get(i).getPrice() * 0.1);
         descountscity = (arrayDescounts.get(i).getPrice() * 0.1);
 
-      } else if (arrayDescounts.get(i).getCityCode() == "13") {
+      } else if (arrayDescounts.get(i).getCityCode().equals("13")) {
         prices = arrayDescounts.get(i).getPrice() - (arrayDescounts.get(i).getPrice() * 0.1);
 
-      } else if (arrayDescounts.get(i).getCityCode() == "07") {
+      } else if (arrayDescounts.get(i).getCityCode().equals("09")) {
         prices = arrayDescounts.get(i).getPrice() - (arrayDescounts.get(i).getPrice() * 0.1);
 
-      } else if (arrayDescounts.get(i).getCityCode() == "07") {
+      } else if (arrayDescounts.get(i).getCityCode().equals("07")) {
         prices = arrayDescounts.get(i).getPrice() - (arrayDescounts.get(i).getPrice() * 0.1);
 
       }
@@ -86,9 +89,9 @@ public class Descounts {
 
   public double getDescounts(boolean descount1) {
     if (descount1 == true) {
-      finalprice = totalprice - (subtotalprice * 0.02);
+      finalprice = getTotalPrice() - (subtotalprice * 0.02);
     } else {
-      finalprice = totalprice;
+      finalprice = getTotalPrice();
     }
     return finalprice;
   }

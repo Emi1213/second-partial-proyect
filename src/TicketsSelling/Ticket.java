@@ -12,12 +12,11 @@ public class Ticket {
   public static void main(String[] args) throws IOException {
 
     Credentials credentials = new Credentials();
-    Descounts descounts = new Descounts();
     Destinos destinos;
     boolean exit = false;
     boolean isValid = false;
 
-    System.out.println("*********************************************************");
+    System.out.println("**************************   *******************************");
     System.out.println("*                                                       *");
     System.out.println("*     Bienvenido a la Aplicacionde venta de boletos     *");
     System.out.println("*            de viaje de transporte público             *");
@@ -36,14 +35,31 @@ public class Ticket {
       destinos.showDestinos();
       ArrayList<Destino> totalDestinies = destinos.getDestinies();
 
-      descounts.getSecondDescount(credentials.getDestinationsQuantity());
-      descounts.getDescounts(credentials.getDescountClients());
+      Facture facture = new Facture(credentials.getArrayCredentials()[0], credentials.getArrayCredentials()[1],
+          credentials.getArrayCredentials()[2], credentials.getArrayCredentials()[3],
+          credentials.getArrayCredentials()[4], credentials.getArrayCredentials()[5],
+          credentials.getDescountClients(), totalDestinies);
 
-      for (Destino destino : totalDestinies) {
-        System.out.println(destino.getCityName() + " " + destino.getCityCode() + " " + destino.getNumberSeats() + " "
-            + destino.getPrice());
-      }
-      showFacture(credentials.getArrayCredentials());
+      System.out.println("\n\n");
+      System.out.println("Desea su factura fisica o electronica? (fisica/electronica)");
+      String answer = System.console().readLine().trim();
+      boolean validexit = false;
+
+      do {
+        if (answer.equalsIgnoreCase("fisica")) {
+
+          facture.factureFisic();
+          validexit = true;
+
+        } else if (answer.equalsIgnoreCase("electronica")) {
+
+          facture.factureElectronic();
+          validexit = true;
+
+        } else {
+          System.out.println("Respuesta inválida, intente de nuevo");
+        }
+      } while (!validexit);
 
       do {
         try {
@@ -64,42 +80,6 @@ public class Ticket {
         }
       } while (!isValid);
     } while (!exit);
-
-  }
-
-  /**
-   * This method is used to show the facture with the user credentials that is
-   * already entered by the user
-   *
-   * @param userCredentials - array with user credentials (name, lastName, ID,
-   *                        age, phone, email) to use in the Facture
-   * @throws IOException
-   */
-  public static void showFacture(String[] userCredentials) throws IOException {
-
-    Facture facture = new Facture(userCredentials[0], userCredentials[1], userCredentials[2],
-        userCredentials[3], userCredentials[4], userCredentials[5]);
-
-    System.out.println("\n\n");
-    System.out.println("Desea su factura fisica o electronica? (fisica/electronica)");
-    String answer = System.console().readLine().trim();
-    boolean validexit = false;
-
-    do {
-      if (answer.equalsIgnoreCase("fisica")) {
-
-        facture.factureFisic();
-        validexit = true;
-
-      } else if (answer.equalsIgnoreCase("electronica")) {
-
-        facture.factureElectronic();
-        validexit = true;
-
-      } else {
-        System.out.println("Respuesta inválida, intente de nuevo");
-      }
-    } while (!validexit);
 
   }
 }
