@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
 import utils.Colors;
 import utils.UserInput;
 
@@ -131,6 +130,23 @@ public class FileCreation {
                                 Colors.ANSI_CYAN + "El paquete se ha creado correctamente" + Colors.ANSI_RESET);
                         isCreated = true;
                     }
+                    if (i == ArraypackageName.size() - 1) {
+                        File projectFile = new File(
+                                packageFolder.getAbsolutePath() + "\\"
+                                        + projectName + ".java");
+                        if (projectFile.exists()) {
+                            System.out.println(Colors.ANSI_RED + "El archivo \"" + projectName + ".java\" ya existe"
+                                    + Colors.ANSI_RESET);
+                            isCreated = false;
+                        } else {
+                            projectFile.createNewFile();
+                            System.out.println(
+                                    Colors.ANSI_CYAN + "El archivo \"" + projectName
+                                            + ".java\" se ha creado correctamente"
+                                            + Colors.ANSI_RESET);
+                            isCreated = true;
+                        }
+                    }
                 }
             } else {
                 packageFolder = new File(getProjectFolderPath() + "\\" + packageName);
@@ -154,7 +170,7 @@ public class FileCreation {
             }
         } catch (Exception e) {
             System.out.println(
-                    Colors.ANSI_RED + "Error en la creación de los paquetes" + e.getMessage() + Colors.ANSI_RESET);
+                    Colors.ANSI_RED + "Error en la creación de los paquetes: " + e.getMessage() + Colors.ANSI_RESET);
             return false;
         }
     }
@@ -189,6 +205,19 @@ public class FileCreation {
                         isCreated = true;
                     }
                 }
+                File projectFile = new File(getProjectFolderPath() + "\\"
+                        + projectName + ".java");
+                if (projectFile.exists()) {
+                    System.out.println(Colors.ANSI_RED + "El archivo \"" + projectName + ".java\" ya existe"
+                            + Colors.ANSI_RESET);
+                    isCreated = false;
+                } else {
+                    projectFile.createNewFile();
+                    System.out.println(
+                            Colors.ANSI_CYAN + "El archivo \"" + projectName + ".java\" se ha creado correctamente"
+                                    + Colors.ANSI_RESET);
+                    isCreated = true;
+                }
             } else {
                 packageFolder = new File(getProjectFolderPath() + "\\" + packageName);
                 if (packageFolder.exists()) {
@@ -210,7 +239,7 @@ public class FileCreation {
 
             }
         } catch (Exception e) {
-            System.out.println("Error en la creación de los paquetes" + e);
+            System.out.println("Error en la creación de los paquetes: " + e.getMessage());
             return false;
         }
     }
@@ -222,11 +251,43 @@ public class FileCreation {
      */
 
     public String showFilesPropities(File file) {
-        String filePropities = file.getName() + "\tTamaño:" + String.valueOf(file.length()) + " Bytes"
-                + "\tRead Permisses: "
-                + file.canRead() + "\tWrite Permisses: " + file.canWrite();
+        String filePropities = Colors.ANSI_BLUE + "*********************************************************\n"
+                + "Nombre: " + Colors.ANSI_RESET + file.getName() + "\n" + Colors.ANSI_BLUE + "Tipo: "
+                + Colors.ANSI_RESET + showFileType(file) + "\t            " + Colors.ANSI_BLUE + "Tamaño: "
+                + Colors.ANSI_RESET
+                + String.valueOf(file.length()) + " Bytes"
+                + "\n" + Colors.ANSI_BLUE + "Permisos de Lectura: " + Colors.ANSI_RESET
+                + changeBooleanToString(file.canRead()) + "     " + Colors.ANSI_BLUE + "Permisos de escritura: "
+                + Colors.ANSI_RESET
+                + changeBooleanToString(file.canWrite()) + "\n";
 
         return filePropities;
+    }
+
+    /**
+     * @description Change true to si and false to no
+     * @param booleanToChange
+     * @return String with the boolean value
+     */
+    public String changeBooleanToString(boolean booleanToChange) {
+        if (booleanToChange) {
+            return "Si";
+        } else {
+            return "No";
+        }
+    }
+
+    /**
+     * @description Show Archivo if the file is a file or carpeta if is a directory
+     * @param file
+     * @return String with the type of the file
+     */
+    public String showFileType(File file) {
+        if (file.isFile()) {
+            return "Archivo";
+        } else {
+            return "Carpeta";
+        }
     }
 
     /**
@@ -962,14 +1023,17 @@ public class FileCreation {
             if (file.isFile()) {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println(line);
-                }
-                if (br.readLine() == null) {
+                if ((line = br.readLine()) == null) {
                     System.out.println(Colors.ANSI_WHITE + "El archivo está vacío" + Colors.ANSI_RESET);
+                } else {
+                    System.out.println(line);
+                    while (br.ready()) {
+                        line = br.readLine();
+                        System.out.println(line);
+                    }
+                    br.close();
+                    isRead = true;
                 }
-                br.close();
-                isRead = true;
             } else {
                 System.out.println("El argumento enviado no es un archivo");
             }
@@ -1024,7 +1088,7 @@ public class FileCreation {
                         try {
                             System.out.println("Ingrese el contenido del archivo (Se escribirá al final): ");
                             String content = System.console().readLine();
-                            fw.write(content);
+                            fw.write(content + "\n");
                             fw.flush();
                             isWritten = true;
                             System.out.println("Deseas escribir otra linea? (s/n)");
